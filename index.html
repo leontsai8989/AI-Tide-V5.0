@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Tide4U-V4.0</title>
+    <title>AI Portfolio Master - Pro V5.10</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -15,20 +15,19 @@
         [v-cloak] { display: none; }
         body { 
             font-family: 'Roboto', 'Noto Sans TC', sans-serif; 
-            background-color: #f8fafc; 
-            background-image: radial-gradient(circle at 50% 0%, #eef2ff 0%, #f8fafc 100%); 
-            color: #334155; 
+            background-color: #e2e8f0; 
+            color: #1e293b; 
             height: 100vh; 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            padding: 16px; 
+            padding: 12px; 
             padding-bottom: env(safe-area-inset-bottom); 
         }
         #app { 
             width: 100%; 
-            max-width: 1600px; 
+            max-width: 1800px; 
             height: 100%; 
             display: flex; 
             flex-direction: column; 
@@ -37,148 +36,96 @@
         }
         
         @media (max-width: 768px) {
-            body { padding: 12px; height: auto; overflow: auto; display: block; }
+            body { padding: 8px; height: auto; overflow: auto; display: block; }
             #app { height: auto; min-height: 100vh; overflow: visible; }
-            .nav-btn { padding: 8px 16px !important; font-size: 12px !important; }
-            .card-wrap { border-radius: 1rem; }
-            td, th { padding: 12px 8px; }
+            .nav-btn { padding: 6px 12px !important; font-size: 12px !important; }
             .hidden-mobile { display: none; }
         }
 
-        .mono { font-family: 'Roboto', sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); }
-        .card-wrap { border-radius: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; background: white; border: 1px solid #f1f5f9; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .card-wrap:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08); }
+        .mono { font-family: 'Roboto', monospace; font-variant-numeric: tabular-nums; }
         
+        .compact-card { 
+            background: #ffffff; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            padding: 14px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .compact-card:hover { border-color: #94a3b8; box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
+
         .custom-scrollbar { overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         
         .scroll-x { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .scroll-x::-webkit-scrollbar { display: none; }
 
-        .edit-input { width: 100%; padding: 4px 8px; border-radius: 8px; background: transparent; text-align: center; font-weight: 700; font-size: 14px; border: 1px solid transparent; outline: none; transition: all 0.2s; font-family: 'Roboto', sans-serif; cursor: text !important; }
+        .edit-input { width: 100%; padding: 4px 6px; border-radius: 6px; background: transparent; text-align: center; font-weight: 700; font-size: 13px; border: 1px solid transparent; outline: none; transition: all 0.2s; cursor: text !important; }
         .edit-input:hover { background: #f1f5f9; }
-        .edit-input:focus { background: white; border-color: #c7d2fe; box-shadow: 0 0 0 2px #e0e7ff; color: #4f46e5; }
+        .edit-input:focus { background: white; border-color: #6366f1; box-shadow: 0 0 0 1px #6366f1; }
         
-        .nav-btn { padding: 10px 24px; border-radius: 14px; font-size: 13px; font-weight: 900; letter-spacing: 0.05em; transition: all 0.2s; border: 1px solid transparent; white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-        .nav-btn-active { background: white; color: #4f46e5; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05); border-color: #eef2ff; }
-        .nav-btn-inactive { color: #64748b; }
-        .nav-btn-inactive:hover { color: #334155; background: rgba(255,255,255,0.6); }
+        .nav-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 900; transition: all 0.1s; border: 1px solid transparent; white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 4px; background: #f8fafc; color: #64748b;}
+        .nav-btn-active { background: #1e293b; color: #ffffff; border-color: #0f172a; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .nav-btn-inactive:hover { background: #e2e8f0; color: #0f172a; }
         
-        table { border-spacing: 0 8px; border-collapse: separate; width: 100%; }
-        td { padding: 12px; font-size: 13px; font-weight: 700; color: #334155; background: white; border-bottom: 0; vertical-align: middle; transition: all 0.2s; }
-        td:first-child { border-top-left-radius: 0.8rem; border-bottom-left-radius: 0.8rem; padding-left: 12px; }
-        td:last-child { border-top-right-radius: 0.8rem; border-bottom-right-radius: 0.8rem; padding-right: 12px; }
-        tr:hover td { background: #f8fafc; }
-        @media (min-width: 768px) { tr:hover td { transform: scale(1.002); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); } }
+        table { border-spacing: 0; border-collapse: collapse; width: 100%; }
+        td { padding: 10px; font-size: 13px; font-weight: 700; color: #1e293b; background: white; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+        tr:hover td { background: #f1f5f9; border-color: #e2e8f0; }
+        @media (min-width: 768px) { tr:hover td { transform: scale(1.001); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); } }
         
-        th { padding: 10px 12px; font-size: 10px; font-weight: 900; color: #94a3b8; letter-spacing: 0.05em; text-align: left; position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); z-index: 10; }
-        .tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 900; white-space: nowrap; }
-        .tag-buy { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
-        .tag-sell { background: #eef2ff; color: #4f46e5; border: 1px solid #e0e7ff; }
-        .tag-hold { background: #f1f5f9; color: #94a3b8; }
+        th { padding: 10px 12px; font-size: 10px; font-weight: 900; color: #94a3b8; letter-spacing: 0.05em; text-align: left; position: sticky; top: 0; background: #f8fafc; z-index: 10; border-bottom: 2px solid #cbd5e1; }
         
-        tbody tr { cursor: default !important; }
-        .drag-handle { cursor: grab !important; font-size: 20px; color: #cbd5e1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: auto !important; touch-action: none; }
-        .drag-handle:active { cursor: grabbing !important; }
-        tr:hover .drag-handle { color: #6366f1; }
+        .tag { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 900; white-space: nowrap; border: 1px solid transparent;}
+        .tag-buy { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+        .tag-sell { background: #fff1f2; color: #e11d48; border-color: #fecdd3; }
+        .tag-hold { background: #f1f5f9; color: #64748b; border-color: #e2e8f0;}
 
-        .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 4px; }
-        .status-ok { background-color: #10b981; }
-        .status-warn { background-color: #f59e0b; animation: pulse 2s infinite; }
-        .status-err { background-color: #f43f5e; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .spin { animation: spin 1s linear infinite; display:inline-block; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* 自定義數字輸入框隱藏箭頭 */
         input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
+        input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
 
-        /* 策略頁面動畫與樣式增強 */
-        .card-institutional {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .card-institutional:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
+        .slider-thumb {
+            width: 10px; height: 16px; background: #1e293b; border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); position: absolute; z-index: 10;
+            transition: left 0.4s ease-out; transform: translateX(-50%);
         }
         
-        /* --- 法人級終端機 Heat Score 徽章 --- */
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .pulse-red { background: #ef4444; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite; }
+        .pulse-green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+        .pulse-yellow { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
         .heat-score-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 16px;
-            background: #ffffff; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 999px; 
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
-            cursor: default;
+            display: inline-flex; align-items: center; padding: 6px 16px; background: #ffffff; 
+            border: 1px solid #e2e8f0; border-radius: 999px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease; cursor: default;
         }
         .heat-score-badge:hover {
-            transform: translateY(-1px);
-            border-color: var(--heat-color);
-            background: color-mix(in srgb, var(--heat-color) 4%, white);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px); border-color: var(--heat-color);
+            background: color-mix(in srgb, var(--heat-color) 4%, white); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
         }
         .pulsing-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--heat-color);
-            margin-right: 10px;
-            box-shadow: 0 0 6px var(--heat-color);
-            animation: pulse-dot 2s infinite ease-in-out;
+            width: 8px; height: 8px; border-radius: 50%; background-color: var(--heat-color);
+            margin-right: 10px; box-shadow: 0 0 6px var(--heat-color); animation: pulse-dot 2s infinite ease-in-out;
         }
         @keyframes pulse-dot {
             0% { transform: scale(0.9); opacity: 0.8; }
             50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 10px var(--heat-color); }
             100% { transform: scale(0.9); opacity: 0.8; }
         }
-        .badge-label {
-            font-family: 'Roboto', sans-serif;
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: #64748b; 
-        }
-        .badge-separator {
-            width: 1px;
-            height: 12px;
-            background-color: #e2e8f0; 
-            margin: 0 12px;
-        }
-        .badge-value {
-            font-family: 'Roboto', sans-serif;
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: var(--heat-color); 
-        }
+        .badge-label { font-family: 'Roboto', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; color: #64748b; }
+        .badge-separator { width: 1px; height: 12px; background-color: #e2e8f0; margin: 0 12px; }
+        .badge-value { font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: var(--heat-color); }
     </style>
 </head>
 <body>
     <div id="app" v-cloak>
         
-        <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 px-1 shrink-0 z-50">
-            <div class="scroll-x flex gap-2 bg-slate-200/50 p-1.5 rounded-2xl backdrop-blur-md shadow-sm border border-white/50 w-full">
+        <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-2 px-1 shrink-0 z-50">
+            <div class="scroll-x flex gap-1.5 bg-white p-1.5 rounded-xl shadow-sm border border-slate-300 w-full">
                 <button @click="currentView = 'dashboard'" :class="currentView === 'dashboard' ? 'nav-btn-active' : 'nav-btn-inactive'" class="nav-btn flex-shrink-0">資產配置</button>
                 <button @click="currentView = 'market'" :class="currentView === 'market' ? 'nav-btn-active' : 'nav-btn-inactive'" class="nav-btn flex-shrink-0">總經監測</button>
                 <button @click="currentView = 'strategy'" :class="currentView === 'strategy' ? 'nav-btn-active' : 'nav-btn-inactive'" class="nav-btn flex-shrink-0">策略執行</button>
@@ -186,341 +133,418 @@
                 <button @click="currentView = 'backup'" :class="currentView === 'backup' ? 'nav-btn-active' : 'nav-btn-inactive'" class="nav-btn flex-shrink-0">系統備份</button>
                 <button @click="currentView = 'instructions'" :class="currentView === 'instructions' ? 'nav-btn-active' : 'nav-btn-inactive'" class="nav-btn flex-shrink-0">操作說明</button>
                 
-                <div class="ml-auto flex items-center pr-2 z-50">
-                    <div class="heat-score-badge" 
-                         :style="{ '--heat-color': aiStrategy.score >= 75 ? '#f43f5e' : (aiStrategy.score <= 30 ? '#10b981' : '#f59e0b') }">
-                        <span class="pulsing-dot"></span>
-                        <span class="badge-label hidden md:inline">HEAT SCORE</span>
-                        <div class="badge-separator hidden md:block"></div>
-                        <span class="badge-value">{{ aiStrategy.score }}</span>
+                <div class="ml-auto flex items-center pr-2 z-50" title="最終策略總分 (已考慮宏觀覆寫)">
+                    <div class="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-md border border-slate-200">
+                        <span class="status-dot" :class="aiStrategy.score >= 75 ? 'pulse-red' : (aiStrategy.score <= 30 ? 'pulse-green' : 'pulse-yellow')"></span>
+                        <span class="text-[10px] font-black text-slate-500">HEAT:</span>
+                        <span class="text-base font-black mono" :class="aiStrategy.score >= 75 ? 'text-rose-600' : (aiStrategy.score <= 30 ? 'text-emerald-600' : 'text-amber-600')">{{ aiStrategy.score }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="currentView === 'market'" class="custom-scrollbar p-2 md:p-6 animate-in fade-in duration-500 h-full overflow-y-auto w-full bg-slate-50/50 rounded-3xl border border-slate-100 mt-2">
-            <div class="max-w-[1600px] mx-auto flex flex-col gap-6 pb-12 pt-2">
+        <div v-if="currentView === 'market'" class="custom-scrollbar flex-1 w-full pb-8">
+            <div class="flex flex-col gap-4 pt-2 px-1">
                 
-                <div class="flex justify-end items-center mb-2 gap-4">
-                    <div class="text-right hidden sm:block">
-                        <div class="flex items-center gap-1.5 justify-end">
-                            <div class="w-1.5 h-1.5 rounded-full" :class="vixLoading ? 'bg-amber-400 animate-pulse' : 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'"></div>
-                            <span class="text-[10px] font-black tracking-widest text-slate-500 uppercase">{{ vixLoading ? 'SYNCING...' : 'SYSTEM ONLINE' }}</span>
-                        </div>
-                    </div>
-                    <button @click="refreshMarketData" class="flex items-center gap-2 bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-lg font-black text-xs hover:bg-slate-50 hover:text-indigo-600 transition-all shadow-sm">
-                        <span :class="{'animate-spin inline-block': vixLoading}">↻</span> 更新數據
+                <div class="flex justify-between items-end">
+                    <h2 class="text-lg font-black text-slate-800">Macro Terminal <span class="text-xs text-slate-500 font-bold ml-2">系統雙軌運算陣列</span></h2>
+                    <button @click="refreshMarketData" class="bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded-md font-bold text-xs hover:bg-slate-50 shadow-sm flex items-center gap-1.5">
+                        <span :class="{'animate-spin': vixLoading}">↻</span> 更新數據
                     </button>
                 </div>
 
-                <div class="w-full rounded-2xl overflow-hidden relative shadow-md border transition-colors duration-700" 
-                     :class="macroRiskLevel.total >= 60 ? 'bg-[#2a0f12] border-rose-900' : (macroRiskLevel.total >= 30 ? 'bg-[#1f1805] border-amber-900' : 'bg-slate-900 border-slate-800')">
-                    
-                    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-                    
-                    <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div class="flex flex-col text-center md:text-left flex-1">
-                            <div class="flex items-center justify-center md:justify-start gap-2 mb-3">
-                                <div class="w-2 h-2 rounded-sm animate-pulse" :class="macroRiskLevel.total >= 60 ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]' : (macroRiskLevel.total >= 30 ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]')"></div>
-                                <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">宏觀風險引擎</h3>
+                <div class="bg-slate-900 rounded-xl p-3 shadow-lg border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-black/40 rounded-lg p-4 flex justify-between items-center border-l-4" :class="macroRiskLevel.total >= 60 ? 'border-rose-500 shadow-[inset_4px_0_15px_rgba(225,29,72,0.15)]' : (macroRiskLevel.total >= 30 ? 'border-amber-500' : 'border-emerald-500')">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Macro Risk (左腦防禦)</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-black text-white">系統風險預警</span>
+                                <div v-if="macroRiskLevel.warnings.length === 0" class="text-[9px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">結構穩定</div>
+                                <div v-else class="flex flex-col gap-0.5">
+                                    <div v-for="(warn, i) in macroRiskLevel.warnings" :key="i" class="text-[9px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded border border-rose-500/30">{{ warn }}</div>
+                                </div>
                             </div>
-                            <h1 class="text-3xl font-900 text-white tracking-tight mb-2">系統風險預警指數</h1>
-                            <p class="text-xs text-white/50 font-bold max-w-lg leading-relaxed">底層防禦架構。結合殖利率曲線矩陣與實質利率，當系統判定衰退風險過高時，將強制覆寫動能模型，阻斷買進部位並要求提高現金儲備。</p>
+                        </div>
+                        <div class="text-5xl md:text-6xl font-black mono leading-none transition-colors duration-500" 
+                             :class="macroRiskLevel.total >= 60 ? 'text-rose-400 drop-shadow-[0_0_12px_rgba(244,63,94,0.5)]' : (macroRiskLevel.total >= 30 ? 'text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.5)]' : 'text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]')">
+                            {{ macroRiskLevel.total }}<span class="text-lg opacity-50 ml-0.5">%</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-lg p-4 flex justify-between items-center border-l-4" :class="momentumScore.total >= 75 ? 'border-rose-500 shadow-[inset_4px_0_15px_rgba(225,29,72,0.15)]' : (momentumScore.total <= 40 ? 'border-emerald-500 shadow-[inset_4px_0_15px_rgba(16,185,129,0.15)]' : 'border-amber-500')">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Momentum (右腦攻擊)</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-black text-white">當下情緒動能</span>
+                                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded border" :class="momentumScore.colorClass">{{ momentumScore.status }}</span>
+                            </div>
+                        </div>
+                        <div class="text-5xl md:text-6xl font-black mono leading-none transition-colors duration-500"
+                             :class="momentumScore.total >= 75 ? 'text-rose-400 drop-shadow-[0_0_12px_rgba(244,63,94,0.5)]' : (momentumScore.total <= 40 ? 'text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]' : 'text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.5)]')">
+                            {{ momentumScore.total }}<span class="text-lg opacity-50 ml-0.5">分</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-300 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-slate-100 px-4 py-2 border-b border-slate-300 flex items-center gap-2">
+                        <span class="text-sm">🏛️</span>
+                        <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest">總經底層基建 (判定海嘯機率)</h3>
+                        <span class="ml-auto text-[10px] font-black text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-300 shadow-sm hidden sm:block">指標進度：左側 = 綠色(安全) | 右側 = 紅色(衰退/枯竭)</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                        <div class="p-4 flex flex-col justify-between bg-slate-50/50 hover:bg-white transition-colors h-full">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <a href="https://fred.stlouisfed.org/series/T10Y2Y" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 underline decoration-slate-300 underline-offset-2">10Y-2Y 利差</a>
+                                        <div class="text-[12px] text-slate-500 font-bold mt-0.5">市場衰退先行指標</div>
+                                    </div>
+                                    <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.yieldCurve || 0) >= 0.5 ? 'bg-rose-100 text-rose-600' : ((indices.yieldCurve || 0) >= 0 ? 'bg-amber-100 text-amber-600' : 'bg-slate-200 text-slate-600')">
+                                        {{ (indices.yieldCurve || 0) >= 0.5 ? '急速陡峭' : ((indices.yieldCurve || 0) >= 0 ? '轉正警戒' : '正常倒掛') }}
+                                    </div>
+                                </div>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <input v-model.number="indices.yieldCurve" @input="saveData" type="number" step="0.01" class="text-4xl font-black mono w-24 p-0 bg-transparent outline-none focus:border-b-2 focus:border-indigo-400 transition-colors" 
+                                           :class="(indices.yieldCurve || 0) >= 0 ? 'text-rose-600' : ((indices.yieldCurve || 0) < -1.0 ? 'text-emerald-600' : 'text-amber-500')" placeholder="-0.50">
+                                    <span class="text-sm font-bold text-slate-400">%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="relative w-full h-1.5 rounded-full" style="background: linear-gradient(to right, #10b981 0%, #f59e0b 40%, #ef4444 100%);">
+                                    <div class="absolute top-0 bottom-0 w-px bg-slate-900/20 z-0" style="left: 40%;"></div>
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max((((indices.yieldCurve || 0) + 2.0) / 5.0) * 100, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="relative h-3 mt-2 w-full text-[12px] font-black">
+                                    <span class="absolute left-0 text-emerald-600">-2.0 (深倒掛)</span>
+                                    <span class="absolute text-slate-500 -translate-x-1/2" style="left: 40%;">0</span>
+                                    <span class="absolute right-0 text-rose-600">+3.0 (陡峭)</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="flex items-stretch gap-6 bg-black/40 p-4 rounded-xl backdrop-blur-sm border border-white/10 w-full md:w-auto">
-                            <div class="flex flex-col items-center justify-center pr-6 border-r border-white/10">
-                                <span class="text-[9px] text-white/40 font-black uppercase tracking-widest mb-1.5">風險分數</span>
-                                <div class="text-5xl md:text-6xl font-900 tracking-tighter text-white leading-none font-mono">
-                                    {{ macroRiskLevel.total }}<span class="text-lg text-white/40 font-bold ml-0.5">%</span>
+                        <div class="p-4 flex flex-col justify-between bg-slate-50/50 hover:bg-white transition-colors h-full">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <a href="https://fred.stlouisfed.org/series/T10Y3M" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 underline decoration-slate-300 underline-offset-2">10Y-3M 利差</a>
+                                        <div class="text-[12px] text-slate-500 font-bold mt-0.5">聯準會官方基準</div>
+                                    </div>
+                                    <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.yieldCurve3M || 0) >= 0 ? 'bg-rose-500 text-white animate-pulse' : 'bg-slate-200 text-slate-600'">
+                                        {{ (indices.yieldCurve3M || 0) >= 0 ? '紅燈死刑' : '正常倒掛' }}
+                                    </div>
+                                </div>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <input v-model.number="indices.yieldCurve3M" @input="saveData" type="number" step="0.01" class="text-4xl font-black mono w-24 p-0 bg-transparent outline-none focus:border-b-2 focus:border-indigo-400 transition-colors" 
+                                           :class="(indices.yieldCurve3M || 0) >= 0 ? 'text-rose-600' : ((indices.yieldCurve3M || 0) < -1.0 ? 'text-emerald-600' : 'text-amber-500')" placeholder="-0.80">
+                                    <span class="text-sm font-bold text-slate-400">%</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col justify-center gap-2 min-w-[160px]">
-                                <div v-for="(warn, i) in macroRiskLevel.warnings" :key="i" class="text-[10px] font-black text-rose-400 bg-rose-500/10 px-2.5 py-1.5 rounded border border-rose-500/20 flex items-center gap-2 tracking-wide">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></div>
-                                    {{ warn }}
+                            <div>
+                                <div class="relative w-full h-1.5 rounded-full" style="background: linear-gradient(to right, #10b981 0%, #f59e0b 40%, #ef4444 100%);">
+                                    <div class="absolute top-0 bottom-0 w-px bg-slate-900/20 z-0" style="left: 40%;"></div>
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max((((indices.yieldCurve3M || 0) + 2.0) / 5.0) * 100, 0), 100) + '%' }"></div>
                                 </div>
-                                <div v-if="macroRiskLevel.warnings.length === 0" class="text-[10px] font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-1.5 rounded border border-emerald-500/20 flex items-center gap-2 tracking-wide">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                                    結構穩定 / 無系統風險
+                                <div class="relative h-3 mt-2 w-full text-[12px] font-black">
+                                    <span class="absolute left-0 text-emerald-600">-2.0 (深倒掛)</span>
+                                    <span class="absolute text-slate-500 -translate-x-1/2" style="left: 40%;">0</span>
+                                    <span class="absolute right-0 text-rose-600">+3.0 (陡峭)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex flex-col justify-between bg-slate-50/50 hover:bg-white transition-colors h-full">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <a href="https://fred.stlouisfed.org/series/DFII10" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 underline decoration-slate-300 underline-offset-2">實質利率/抗通膨債券 (TIPS)</a>
+                                        <div class="text-[12px] text-slate-500 font-bold mt-0.5">無風險資金成本壓力</div>
+                                    </div>
+                                    <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.realRate || 0) > 2.0 ? 'bg-rose-100 text-rose-600' : ((indices.realRate || 0) < 0.5 ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-50 text-amber-600')">
+                                        {{ (indices.realRate || 0) > 2.0 ? '極高 (拋售)' : ((indices.realRate || 0) < 0.5 ? '寬鬆 (活水)' : '中性') }}
+                                    </div>
+                                </div>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <input v-model.number="indices.realRate" @input="saveData" type="number" step="0.01" class="text-4xl font-black mono w-24 p-0 bg-transparent outline-none focus:border-b-2 focus:border-indigo-400 transition-colors" 
+                                           :class="(indices.realRate || 0) > 2.0 ? 'text-rose-600' : ((indices.realRate || 0) < 0 ? 'text-emerald-600' : 'text-amber-500')" placeholder="1.80">
+                                    <span class="text-sm font-bold text-slate-400">%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="relative w-full h-1.5 rounded-full" style="background: linear-gradient(to right, #10b981 0%, #f59e0b 25%, #ef4444 100%);">
+                                    <div class="absolute top-0 bottom-0 w-px bg-slate-900/20 z-0" style="left: 25%;"></div>
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max((((indices.realRate || 0) + 1.0) / 4.0) * 100, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="relative h-3 mt-2 w-full text-[12px] font-black">
+                                    <span class="absolute left-0 text-emerald-600">-1.0 (極度寬鬆)</span>
+                                    <span class="absolute text-slate-500 -translate-x-1/2" style="left: 25%;">0</span>
+                                    <span class="absolute right-0 text-rose-600">+3.0 (枯竭)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-2">
-                    
-                    <div class="lg:col-span-4 flex flex-col gap-4">
-                        <div class="flex items-center gap-2 px-1">
-                            <div class="w-1.5 h-4 bg-slate-400 rounded-sm"></div>
-                            <h3 class="text-xs font-black text-slate-500 tracking-widest">總經底層結構</h3>
-                        </div>
-
-                        <div class="card-institutional border-t-4 border-l-0" :class="(indices.yieldCurve >= 0 && indices.yieldCurve3M >= 0) ? 'border-t-rose-600 bg-rose-50/30' : (indices.yieldCurve >= 0 ? 'border-t-amber-500 bg-amber-50/20' : 'border-t-slate-800')">
-                            <div class="flex justify-between items-start mb-5">
-                                <div>
-                                    <span class="text-sm font-black text-slate-800 tracking-wide">殖利率曲線矩陣</span>
-                                    <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">聯準會雙重衰退預警</div>
-                                </div>
-                                <div class="bg-slate-100 text-slate-500 px-2 py-1 rounded text-[9px] font-black tracking-widest">慢速訊號</div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-100">
-                                <div class="flex flex-col">
-                                    <a href="https://fred.stlouisfed.org/series/T10Y2Y" target="_blank" class="text-[10px] font-black text-slate-500 hover:text-indigo-600 transition-colors tracking-wide underline decoration-slate-300 underline-offset-2">10Y-2Y (市場先行)</a>
-                                    <div class="flex items-baseline gap-1 relative group mt-1">
-                                        <input v-model.number="indices.yieldCurve" @input="saveData" type="number" step="0.01" class="text-3xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 hover:bg-white focus:bg-white focus:ring-2 focus:ring-slate-200 rounded transition-all cursor-text z-10 mono" :class="indices.yieldCurve >= 0 ? 'text-rose-600' : 'text-slate-700'" placeholder="-0.50">
-                                        <span class="text-xs font-bold text-slate-400">%</span>
-                                        <span class="absolute -right-4 top-2 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-xs">✎</span>
-                                    </div>
-                                </div>
-                                <div class="text-[10px] font-black px-2 py-1 rounded border tracking-widest" :class="indices.yieldCurve >= 0 ? 'bg-rose-100 text-rose-600 border-rose-200' : 'bg-slate-50 text-slate-400 border-slate-200'">
-                                    {{ indices.yieldCurve >= 0 ? '轉正 (黃燈)' : '倒掛 (拉弓)' }}
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex flex-col">
-                                    <a href="https://fred.stlouisfed.org/series/T10Y3M" target="_blank" class="text-[10px] font-black text-slate-500 hover:text-indigo-600 transition-colors tracking-wide underline decoration-slate-300 underline-offset-2">10Y-3M (Fed 基準)</a>
-                                    <div class="flex items-baseline gap-1 relative group mt-1">
-                                        <input v-model.number="indices.yieldCurve3M" @input="saveData" type="number" step="0.01" class="text-3xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 hover:bg-white focus:bg-white focus:ring-2 focus:ring-slate-200 rounded transition-all cursor-text z-10 mono" :class="indices.yieldCurve3M >= 0 ? 'text-rose-600' : 'text-slate-700'" placeholder="-0.80">
-                                        <span class="text-xs font-bold text-slate-400">%</span>
-                                        <span class="absolute -right-4 top-2 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-xs">✎</span>
-                                    </div>
-                                </div>
-                                <div class="text-[10px] font-black px-2 py-1 rounded border tracking-widest" :class="indices.yieldCurve3M >= 0 ? 'bg-rose-600 text-white border-rose-600 animate-pulse shadow-sm' : 'bg-slate-50 text-slate-400 border-slate-200'">
-                                    {{ indices.yieldCurve3M >= 0 ? '實質緊縮 (紅燈)' : '倒掛 (拉弓)' }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-institutional border-t-4 border-l-0" :class="indices.realRate > 2.0 ? 'border-t-rose-600 bg-rose-50/30' : 'border-t-slate-800'">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <a href="https://fred.stlouisfed.org/series/DFII10" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 transition-colors tracking-wide">實質利率 (TIPS)</a>
-                                    <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">資金成本與流動性壓力</div>
-                                </div>
-                                <div class="bg-slate-100 text-slate-500 px-2 py-1 rounded text-[9px] font-black tracking-widest">慢速訊號</div>
-                            </div>
-                            <div class="flex items-end justify-between mt-6">
-                                <div class="flex items-baseline gap-1 relative group">
-                                    <input v-model.number="indices.realRate" @input="saveData" type="number" step="0.01" class="text-4xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 hover:bg-white focus:bg-white focus:ring-2 focus:ring-slate-200 rounded transition-all cursor-text z-10 mono" :class="indices.realRate > 2.0 ? 'text-rose-600' : 'text-slate-700'" placeholder="1.80">
-                                    <span class="text-sm font-bold text-slate-400">%</span>
-                                    <span class="absolute -right-4 top-2.5 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-xs">✎</span>
-                                </div>
-                                <div class="text-right">
-                                    <div class="text-[9px] font-bold text-slate-400 mb-1.5 tracking-widest">壓力狀態</div>
-                                    <div class="text-[10px] font-black px-2.5 py-1 rounded border tracking-widest" :class="indices.realRate > 2.0 ? 'bg-rose-100 text-rose-600 border-rose-200' : 'bg-emerald-50 text-emerald-600 border-emerald-100'">
-                                        {{ indices.realRate > 2.0 ? '極高 (拋售潮)' : '安全區間' }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="flex flex-col gap-3 mt-2">
+                    <div class="flex items-center gap-3 px-2 border-b-2 border-slate-300 pb-2">
+                        <span class="text-sm">⚡</span>
+                        <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest">動能與市場情緒 (尋找勝率買賣點)</h3>
+                        <span class="ml-auto text-[10px] font-black text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-300 shadow-sm hidden sm:block">數值與指針：左側綠色 = 買入 | 右側紅色 = 賣出</span>
                     </div>
 
-                    <div class="lg:col-span-8 flex flex-col gap-4">
-                        <div class="flex items-center gap-2 px-1">
-                            <div class="w-1.5 h-4 bg-indigo-500 rounded-sm"></div>
-                            <h3 class="text-xs font-black text-slate-500 tracking-widest">動能與市場情緒</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://finance.yahoo.com/quote/0050.TW/" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">0050 60MA乖離</a>
+                                    <div class="text-[12px] font-bold text-slate-500 mt-0.5 flex items-center gap-2">台股大盤熱度 <button v-if="manualBias !== null" @click="manualBias = null" class="text-[8px] bg-slate-200 px-1 rounded hover:bg-slate-300 text-slate-600">重置同步</button></div>
+                                </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 20%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline">
+                                    <input v-model.number="manualBias" type="number" class="text-4xl font-black mono w-24 p-0 bg-transparent outline-none transition-colors" 
+                                           :class="parseFloat(displayBias || 0) >= 10 ? 'text-rose-600' : (parseFloat(displayBias || 0) <= -5 ? 'text-emerald-600' : 'text-amber-500')" :placeholder="parseFloat(biasIndex || 0).toFixed(1)">
+                                    <span class="text-xs font-bold text-slate-400">%</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[14px] font-bold text-slate-400 mb-0.5">短線 20MA</div>
+                                    <div class="text-[14px] font-black mono" :class="(indices.bias0050_20 || 0) >= 0 ? 'text-rose-500' : 'text-emerald-500'">{{ (indices.bias0050_20 || 0) > 0 ? '+' : '' }}{{ indices.bias0050_20 || 0 }}%</div>
+                                </div>
+                            </div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(((parseFloat(displayBias || 0) + 15) / 30) * 100, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">超跌 (-15%)</span><span>中立</span><span class="text-rose-500">過熱 (+15%)</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            
-                            <div class="card-institutional border-l-4 border-l-indigo-500 h-full p-5">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <a href="https://finance.yahoo.com/quote/0050.TW/" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 transition-colors tracking-wide">台灣 50 (0050)</a>
-                                        <div class="flex items-center gap-2 mt-1">
-                                            <div class="text-[10px] text-slate-400 font-bold tracking-wider">大盤雙均線偏離</div>
-                                            <button v-if="manualBias !== null" @click="manualBias = null" class="text-[8px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded hover:bg-amber-200 transition-colors">恢復同步</button>
-                                        </div>
-                                    </div>
-                                    <div class="bg-slate-50 text-slate-400 px-2 py-1 rounded text-[9px] font-black font-mono">權重: 20%</div>
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://finance.yahoo.com/quote/%5ESOX/" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">SOX 費半指數60MA乖離</a>
+                                    <div class="text-[12px] font-bold text-slate-500 mt-0.5">科技上游情緒</div>
                                 </div>
-                                <div class="flex items-end justify-between mb-3">
-                                    <div class="flex items-baseline gap-1 relative group">
-                                        <input v-model.number="manualBias" type="number" class="text-3xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 hover:bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded transition-all cursor-text z-10 mono" :class="parseFloat(displayBias) >= 15 ? 'text-rose-600' : (parseFloat(displayBias) <= -15 ? 'text-emerald-600' : 'text-slate-700')" :placeholder="parseFloat(biasIndex || 0).toFixed(1)">
-                                        <span class="text-sm font-bold text-slate-400">%</span>
-                                        <span class="absolute -right-4 top-2 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-xs">✎</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-[9px] font-bold text-slate-400 mb-1.5 tracking-widest">短線 20MA</div>
-                                        <div class="text-[10px] font-black px-2 py-0.5 rounded border mono" :class="indices.bias0050_20 >= 0 ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100'">
-                                            {{ indices.bias0050_20 > 0 ? '+' : '' }}{{ indices.bias0050_20 }}%
-                                        </div>
-                                    </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 20%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline">
+                                    <input v-model.number="indices.soxBias" type="number" readonly class="text-4xl font-black mono w-24 p-0 bg-transparent outline-none transition-colors" 
+                                           :class="parseFloat(indices.soxBias || 0) >= 15 ? 'text-rose-600' : (parseFloat(indices.soxBias || 0) <= -10 ? 'text-emerald-600' : 'text-amber-500')" :placeholder="parseFloat(indices.soxBias || 0).toFixed(1)">
+                                    <span class="text-xs font-bold text-slate-400">%</span>
                                 </div>
-                                <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-3">
-                                    <span>-20%</span><span>0%</span><span>+20%</span>
-                                </div>
-                                <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 opacity-60"></div>
-                                    <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min(Math.max(((parseFloat(displayBias) + 20) / 40) * 100, 0), 100) + '%' }"></div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1.5">
-                                    <span>超跌</span><span>中立</span><span>過熱</span>
+                                <div class="text-right">
+                                    <div class="text-[14px] font-bold text-slate-400 mb-0.5">短線 20MA</div>
+                                    <div class="text-[14px] font-black mono" :class="(indices.soxBias_20 || 0) >= 0 ? 'text-rose-500' : 'text-emerald-500'">{{ (indices.soxBias_20 || 0) > 0 ? '+' : '' }}{{ indices.soxBias_20 || 0 }}%</div>
                                 </div>
                             </div>
-
-                            <div class="card-institutional border-l-4 border-l-indigo-500 h-full p-5">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <a href="https://finance.yahoo.com/quote/%5ESOX/" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 transition-colors tracking-wide">費城半導體 (SOX)</a>
-                                        <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">科技股上游情緒</div>
-                                    </div>
-                                    <div class="bg-slate-50 text-slate-400 px-2 py-1 rounded text-[9px] font-black font-mono">權重: 20%</div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(((parseFloat(indices.soxBias || 0) + 25) / 50) * 100, 0), 100) + '%' }"></div>
                                 </div>
-                                <div class="flex items-end justify-between mb-3">
-                                    <div class="flex items-baseline gap-1">
-                                        <input v-model.number="indices.soxBias" type="number" readonly class="text-3xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 mono" :class="parseFloat(indices.soxBias || 0) >= 15 ? 'text-rose-600' : (parseFloat(indices.soxBias || 0) <= -15 ? 'text-emerald-600' : 'text-slate-700')" :placeholder="parseFloat(indices.soxBias || 0).toFixed(1)">
-                                        <span class="text-sm font-bold text-slate-400">%</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-[9px] font-bold text-slate-400 mb-1.5 tracking-widest">短線 20MA</div>
-                                        <div class="text-[10px] font-black px-2 py-0.5 rounded border mono" :class="indices.soxBias_20 >= 0 ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100'">
-                                            {{ indices.soxBias_20 > 0 ? '+' : '' }}{{ indices.soxBias_20 }}%
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-3">
-                                    <span>-20%</span><span>0%</span><span>+20%</span>
-                                </div>
-                                <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 opacity-60"></div>
-                                    <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min(Math.max(((parseFloat(indices.soxBias || 0) + 20) / 40) * 100, 0), 100) + '%' }"></div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1.5">
-                                    <span>超跌</span><span>中立</span><span>過熱</span>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">超跌 (-25%)</span><span>中立</span><span class="text-rose-500">過熱 (+25%)</span>
                                 </div>
                             </div>
-
-                            <div class="card-institutional border-l-4 border-l-amber-500 h-full p-5">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <a href="https://finance.yahoo.com/quote/%5EVIX/" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 transition-colors tracking-wide">恐慌指數 (VIX)</a>
-                                        <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">標普 500 隱含波動率</div>
-                                    </div>
-                                    <div class="bg-slate-50 text-slate-400 px-2 py-1 rounded text-[9px] font-black font-mono">權重: 20%</div>
-                                </div>
-                                <div class="flex items-end justify-between mb-3">
-                                    <div class="flex items-baseline gap-1">
-                                        <div class="text-3xl font-black bg-transparent outline-none tracking-tighter text-slate-700 mono">{{ parseFloat(indices.vix || 0).toFixed(2) }}</div>
-                                        <span class="text-sm font-bold text-slate-400">點</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-[9px] font-bold text-slate-400 mb-1.5 tracking-widest">狀態</div>
-                                        <div class="text-[10px] font-black px-2 py-0.5 rounded border tracking-widest" :class="(indices.vix || 0) > 20 ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-rose-600 border-rose-100'">
-                                            {{ (indices.vix || 0) > 20 ? '超跌買點' : '安逸過熱' }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-3">
-                                    <span>0</span><span>25</span><span>50</span>
-                                </div>
-                                <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-rose-400 via-amber-400 to-emerald-400 opacity-60"></div>
-                                    <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min((indices.vix || 0) / 50 * 100, 100) + '%' }"></div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1.5">
-                                    <span>過度安逸</span><span>常態震盪</span><span>恐慌拋售</span>
-                                </div>
-                            </div>
-
-                            <div class="card-institutional border-l-4 p-5" :class="parseFloat(indices.usdtwdBias || 0) < 0 ? 'border-l-emerald-400' : 'border-l-rose-400'">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <a href="https://finance.yahoo.com/quote/TWD=X/" target="_blank" class="text-sm font-black text-slate-800 hover:text-indigo-600 transition-colors tracking-wide">外資熱錢 (USD/TWD)</a>
-                                        <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">匯率乖離與資金動能</div>
-                                    </div>
-                                    <div class="bg-slate-50 text-slate-400 px-2 py-1 rounded text-[9px] font-black font-mono">權重: 15%</div>
-                                </div>
-                                <div class="flex items-end justify-between mb-3">
-                                    <div class="flex items-baseline gap-1">
-                                        <input v-model.number="indices.usdtwdBias" type="number" readonly class="text-3xl font-black bg-transparent outline-none tracking-tighter w-24 p-0 mono" :class="parseFloat(indices.usdtwdBias || 0) <= -0.5 ? 'text-emerald-500' : (parseFloat(indices.usdtwdBias || 0) >= 0.5 ? 'text-rose-500' : 'text-slate-700')" :placeholder="parseFloat(indices.usdtwdBias || 0).toFixed(2)">
-                                        <span class="text-sm font-bold text-slate-400">%</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-[9px] font-bold text-slate-400 mb-1.5 tracking-widest">資金流向</div>
-                                        <div class="text-[10px] font-black px-2 py-0.5 rounded border tracking-widest" :class="parseFloat(indices.usdtwdBias || 0) < 0 ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-rose-600 border-rose-100'">
-                                            {{ parseFloat(indices.usdtwdBias || 0) < 0 ? '匯入 (利多)' : '匯出 (承壓)' }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-3">
-                                    <span>-3% (強升)</span><span>0%</span><span>+3% (重貶)</span>
-                                </div>
-                                <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 opacity-60"></div>
-                                    <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min(Math.max(((parseFloat(indices.usdtwdBias || 0) + 3) / 6) * 100, 0), 100) + '%' }"></div>
-                                </div>
-                                <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1.5">
-                                    <span>熱錢湧入</span><span>平穩</span><span>資金撤出</span>
-                                </div>
-                            </div>
-
-                            <div class="card-institutional border-l-4 border-l-slate-800 md:col-span-2 p-5">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <span class="text-sm font-black text-slate-800 tracking-wide">大眾貪婪指數 (F&G)</span>
-                                        <div class="text-[10px] text-slate-400 font-bold mt-1 tracking-wider">市場散戶情緒指標</div>
-                                    </div>
-                                    <div class="bg-slate-50 text-slate-400 px-2 py-1 rounded text-[9px] font-black font-mono">權重: 25% (美15+台10)</div>
-                                </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-2">
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex items-end justify-between">
-                                            <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" title="前往 CNN 恐懼與貪婪指數" class="text-xs font-black text-slate-500 hover:text-indigo-600 underline decoration-slate-300 underline-offset-2 transition-colors">美股 (CNN)</a>
-                                            <div class="flex items-baseline gap-1 relative group">
-                                                <input v-model.number="indices.cnn" @input="saveData" type="number" class="text-2xl font-black bg-transparent outline-none tracking-tighter w-16 text-right p-0 hover:bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded transition-all cursor-text z-10 mono" :class="indices.cnn > 55 ? 'text-rose-500' : (indices.cnn < 45 ? 'text-emerald-500' : 'text-slate-700')" placeholder="50">
-                                                <span class="text-[10px] font-bold text-slate-400">分</span>
-                                                <span class="absolute -right-4 top-1.5 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[10px]">✎</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-1">
-                                            <span>0</span><span>50</span><span>100</span>
-                                        </div>
-                                        <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 opacity-60"></div>
-                                            <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min(Math.max(indices.cnn, 0), 100) + '%' }"></div>
-                                        </div>
-                                        <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1">
-                                            <span>極度恐懼</span><span>中立</span><span>極度貪婪</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex items-end justify-between">
-                                            <a href="https://www.macromicro.me/series/46964/taiwan-mm-fear-and-greed-index" target="_blank" title="前往財經M平方 台股情緒指標" class="text-xs font-black text-slate-500 hover:text-indigo-600 underline decoration-slate-300 underline-offset-2 transition-colors">台股 (MM)</a>
-                                            <div class="flex items-baseline gap-1 relative group">
-                                                <input v-model.number="indices.twFear" @input="saveData" type="number" class="text-2xl font-black bg-transparent outline-none tracking-tighter w-16 text-right p-0 hover:bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded transition-all cursor-text z-10 mono" :class="indices.twFear > 60 ? 'text-rose-500' : (indices.twFear < 40 ? 'text-emerald-500' : 'text-slate-700')" placeholder="50">
-                                                <span class="text-[10px] font-bold text-slate-400">分</span>
-                                                <span class="absolute -right-4 top-1.5 text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[10px]">✎</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-between text-[9px] font-mono font-bold text-slate-400 px-0.5 mb-1 mt-1">
-                                            <span>0</span><span>50</span><span>100</span>
-                                        </div>
-                                        <div class="relative w-full h-1.5 rounded-full flex items-center bg-slate-100">
-                                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 opacity-60"></div>
-                                            <div class="absolute w-3 h-3 bg-white rounded-full shadow border border-slate-300 z-10 transition-all duration-500 transform -translate-x-1/2" :style="{ left: Math.min(Math.max(indices.twFear, 0), 100) + '%' }"></div>
-                                        </div>
-                                        <div class="flex justify-between text-[9px] font-black text-slate-400 px-0.5 mt-1">
-                                            <span>極度悲觀</span><span>中立</span><span>極度樂觀</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
+
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://finance.yahoo.com/quote/%5EVIX/" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">恐慌指數 (VIX)</a>
+                                    <div class="text-[12px] font-bold text-slate-500 mt-0.5">標普隱含波動率</div>
+                                </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 20%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline">
+                                    <div class="text-4xl font-black mono transition-colors" 
+                                         :class="(indices.vix || 0) >= 25 ? 'text-emerald-600' : ((indices.vix || 0) <= 15 ? 'text-rose-600' : 'text-amber-500')">
+                                        {{ parseFloat(indices.vix || 0).toFixed(2) }}
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-400 ml-2">點</span>
+                                </div>
+                                <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.vix || 0) >= 25 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'">
+                                    {{ (indices.vix || 0) >= 25 ? '恐慌買點' : '安逸過熱' }}
+                                </div>
+                            </div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(((50 - (indices.vix || 0)) / 40) * 100, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">超跌 (50)</span><span>常態</span><span class="text-rose-500">超漲 (10)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full" :class="parseFloat(indices.usdtwdBias || 0) > 1.5 ? 'bg-rose-500' : 'bg-emerald-500'"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://finance.yahoo.com/quote/TWD=X/" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">USD/TWD 60MA乖離</a>
+                                    <div class="text-[12px] font-bold text-slate-500 mt-0.5">外資熱錢動向</div>
+                                </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 15%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline">
+                                    <input v-model.number="indices.usdtwdBias" type="number" readonly class="text-4xl font-black mono w-20 p-0 bg-transparent outline-none transition-colors" 
+                                           :class="parseFloat(indices.usdtwdBias || 0) > 1.5 ? 'text-rose-600' : (parseFloat(indices.usdtwdBias || 0) < -1.0 ? 'text-emerald-600' : 'text-amber-500')" :placeholder="parseFloat(indices.usdtwdBias || 0).toFixed(2)">
+                                    <span class="text-xs font-bold text-slate-400 ml-1">%</span>
+                                </div>
+                                <div class="text-[12px] font-black px-2 py-0.5 rounded" :class="parseFloat(indices.usdtwdBias || 0) < -1.0 ? 'bg-emerald-100 text-emerald-700' : (parseFloat(indices.usdtwdBias || 0) > 1.5 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-600')">
+                                    {{ parseFloat(indices.usdtwdBias || 0) < -1.0 ? '匯入 (活水)' : (parseFloat(indices.usdtwdBias || 0) > 1.5 ? '匯出 (承壓)' : '平穩') }}
+                                </div>
+                            </div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(((parseFloat(indices.usdtwdBias || 0) + 3) / 6) * 100, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">強升 (-3%)</span><span>平穩</span><span class="text-rose-500">重貶 (+3%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-slate-800"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">美股情緒指數</a>
+                                    <div class="text-[10px] font-bold text-slate-500 mt-0.5">CNN 大眾情緒</div>
+                                </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 15%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline group relative">
+                                    <input v-model.number="indices.cnn" @input="saveData" type="number" class="text-4xl font-black mono w-20 p-0 bg-transparent outline-none focus:border-b-2 focus:border-indigo-400 transition-colors" 
+                                           :class="(indices.cnn || 50) >= 75 ? 'text-rose-600' : ((indices.cnn || 50) <= 25 ? 'text-emerald-600' : 'text-amber-500')" placeholder="50">
+                                    <span class="text-xs font-bold text-slate-400 ml-1">分</span>
+                                    <span class="absolute -right-4 top-1 text-slate-300 opacity-0 group-hover:opacity-100 text-[10px] transition-opacity">✎</span>
+                                </div>
+                                <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.cnn || 50) <= 25 ? 'bg-emerald-100 text-emerald-700' : ((indices.cnn || 50) >= 75 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-600')">
+                                    {{ (indices.cnn || 50) <= 25 ? '恐懼買點' : ((indices.cnn || 50) >= 75 ? '貪婪風險' : '中立') }}
+                                </div>
+                            </div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(indices.cnn || 0, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">恐懼 (0)</span><span>中立</span><span class="text-rose-500">貪婪 (100)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-300 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-slate-800"></div>
+                            <div class="flex justify-between items-start mb-2 pl-2">
+                                <div class="flex flex-col">
+                                    <a href="https://www.macromicro.me/series/46964/taiwan-mm-fear-and-greed-index" target="_blank" class="text-sm font-black text-slate-900 hover:text-indigo-600">台股情緒指數</a>
+                                    <div class="text-[10px] font-bold text-slate-500 mt-0.5">台灣市場情緒</div>
+                                </div>
+                                <span class="text-[10px] font-black bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">WT: 10%</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-3 pl-2">
+                                <div class="flex items-baseline group relative">
+                                    <input v-model.number="indices.twFear" @input="saveData" type="number" class="text-4xl font-black mono w-20 p-0 bg-transparent outline-none focus:border-b-2 focus:border-indigo-400 transition-colors" 
+                                           :class="(indices.twFear || 50) >= 75 ? 'text-rose-600' : ((indices.twFear || 50) <= 25 ? 'text-emerald-600' : 'text-amber-500')" placeholder="50">
+                                    <span class="text-xs font-bold text-slate-400 ml-1">分</span>
+                                    <span class="absolute -right-4 top-1 text-slate-300 opacity-0 group-hover:opacity-100 text-[10px] transition-opacity">✎</span>
+                                </div>
+                                <div class="text-[14px] font-black px-2 py-0.5 rounded" :class="(indices.twFear || 50) <= 25 ? 'bg-emerald-100 text-emerald-700' : ((indices.twFear || 50) >= 75 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-600')">
+                                    {{ (indices.twFear || 50) <= 25 ? '悲觀低點' : ((indices.twFear || 50) >= 75 ? '樂觀過熱' : '中立') }}
+                                </div>
+                            </div>
+                            <div class="pl-2">
+                                <div class="relative w-full h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500">
+                                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-3.5 bg-slate-900 rounded-sm shadow border border-white transition-all duration-500" :style="{ left: Math.min(Math.max(indices.twFear || 0, 0), 100) + '%' }"></div>
+                                </div>
+                                <div class="flex justify-between text-[12px] font-black text-slate-500 mt-1.5">
+                                    <span class="text-emerald-600">恐懼 (0)</span><span>中立</span><span class="text-rose-500">貪婪 (100)</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
             </div>
         </div>
-
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+            <transition 
+                enter-active-class="transition ease-out duration-300 transform origin-bottom-right"
+                enter-from-class="opacity-0 scale-50 translate-y-4"
+                enter-to-class="opacity-100 scale-100 translate-y-0"
+                leave-active-class="transition ease-in duration-200 transform origin-bottom-right"
+                leave-from-class="opacity-100 scale-100 translate-y-0"
+                leave-to-class="opacity-0 scale-50 translate-y-4"
+            >
+                <div v-show="isAiHelperOpen" class="bg-slate-50/95 backdrop-blur-xl border border-slate-300/80 shadow-[0_10px_40px_rgba(0,0,0,0.15)] rounded-2xl w-[90vw] sm:w-[380px] mb-4 flex flex-col overflow-hidden" style="height: 70vh; max-height: 650px; min-height: 450px;">
+                    
+                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-3 flex justify-between items-center shadow-md shrink-0 z-10">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-lg shadow-inner border border-white/20">🤖</div>
+                            <div class="flex flex-col">
+                                <span class="font-black text-sm tracking-widest leading-tight">系統導航精靈</span>
+                                <span class="text-[10px] text-indigo-200 font-bold mt-0.5 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Always Online
+                                </span>
+                            </div>
+                        </div>
+                        <button @click="isAiHelperOpen = false" class="text-indigo-100 hover:text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-all text-lg font-bold">✕</button>
+                    </div>
+                    
+                    <div class="p-4 flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-5 text-sm relative" ref="aiChatBox">
+                        <div v-for="(msg, i) in aiMessages" :key="i" class="flex items-start gap-2.5" :class="msg.role === 'user' ? 'justify-end' : 'justify-start'">
+                            
+                            <div v-if="msg.role === 'assistant'" class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 border border-indigo-200 flex items-center justify-center text-sm shrink-0 shadow-sm mt-1">🤖</div>
+                            
+                            <div class="max-w-[80%] px-4 py-3 shadow-sm text-[13px]" :class="msg.role === 'user' ? 'bg-indigo-500 text-white rounded-2xl rounded-tr-sm' : 'bg-white text-slate-700 rounded-2xl rounded-tl-sm border border-slate-200'">
+                                <p class="font-bold whitespace-pre-line leading-relaxed" v-html="msg.content"></p>
+                            </div>
+                        </div>
+                        
+                        <div v-if="isAiTyping" class="flex justify-start items-center gap-2.5 mt-1">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 border border-indigo-200 flex items-center justify-center text-sm shrink-0 shadow-sm">🤖</div>
+                            <div class="px-4 py-3 rounded-2xl bg-white border border-slate-200 rounded-tl-sm flex gap-1.5 items-center shadow-sm h-10">
+                                <div class="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+                                <div class="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+                                <div class="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border-t border-slate-200 flex flex-col shrink-0 shadow-[0_-4px_15px_rgba(0,0,0,0.03)] z-10">
+                        <div class="px-4 py-2.5 flex items-center gap-2 border-b border-slate-100 bg-slate-50/80">
+                            <span class="text-[11px]">💡</span>
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">點擊以下問題，為您解答</span>
+                        </div>
+                        <div class="p-2.5 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 h-[180px]">
+                            <button v-for="q in aiQuestions" :key="q.id" @click="askAi(q)" class="bg-slate-50 border border-slate-200/80 hover:border-indigo-300 text-slate-600 hover:text-indigo-600 px-3 py-2.5 rounded-xl text-[12px] font-bold hover:bg-indigo-50 transition-all text-left leading-snug group flex items-start gap-2 shadow-sm">
+                                <span class="text-indigo-400 group-hover:text-indigo-600 shrink-0 mt-0.5">▸</span>
+                                <span>{{ q.title }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+            
+            <button @click="isAiHelperOpen = !isAiHelperOpen" class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-full shadow-[0_4px_20px_rgba(99,102,241,0.5)] flex items-center justify-center text-2xl hover:scale-110 transition-transform hover:shadow-[0_4px_25px_rgba(99,102,241,0.7)] group relative z-50">
+                <span class="group-hover:animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-30"></span>
+                🤖
+                <span v-if="!isAiHelperOpen && aiMessages.length === 1" class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>
+            </button>
+        </div>
         <div v-if="currentView === 'strategy'" class="custom-scrollbar p-2 md:p-6 animate-in fade-in duration-500 h-full overflow-y-auto w-full bg-white rounded-3xl border border-slate-100 mt-2">
             <div class="max-w-[1200px] mx-auto flex flex-col gap-6 pb-12 h-full">
                 
@@ -551,7 +575,7 @@
                                     {{ aiStrategy.strategy.level }}
                                 </span>
                                 
-                                <div class="relative z-10 text-4xl md:text-5xl font-900 tracking-tighter mb-6 text-center scale-100 group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" 
+                                <div class="relative z-10 text-4xl md:text-5xl font-900 tracking-tight mb-6 text-center scale-100 group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" 
                                      :class="aiStrategy.percent > 0 ? 'text-emerald-500' : (aiStrategy.percent < 0 ? 'text-rose-500' : 'text-amber-500')">
                                     {{ aiStrategy.strategy.command }}
                                 </div>
@@ -643,12 +667,12 @@
                     <div class="flex flex-col gap-4 h-full">
                         <div class="card-wrap flex-1 flex flex-col justify-center p-6 bg-gradient-to-br from-white to-indigo-50/30">
                             <span class="text-xs font-black text-indigo-500 uppercase tracking-widest">總資產規模 (Total Assets)</span>
-                            <p class="text-3xl md:text-4xl font-900 tracking-tighter mono text-slate-800 mt-2">NT$ {{ (totalMarketValue + cash).toLocaleString() }}</p>
+                            <p class="text-3xl md:text-4xl font-900 mono text-slate-800 mt-2">NT$ {{ (totalMarketValue + cash).toLocaleString() }}</p>
                         </div>
                         <div class="card-wrap flex-1 flex flex-col justify-center p-6" :class="totalProfit >= 0 ? 'bg-gradient-to-br from-white to-rose-50/30' : 'bg-gradient-to-br from-white to-emerald-50/30'">
                             <span class="text-xs font-black text-slate-400 uppercase tracking-widest">投資總損益 / 報酬率</span>
                             <div class="mt-2 flex items-baseline gap-3 flex-wrap">
-                                <p class="text-3xl md:text-4xl font-900 mono tracking-tighter leading-none" :class="totalProfit >= 0 ? 'text-rose-500' : 'text-emerald-500'">{{ totalProfit >= 0 ? '+' : '' }}{{ totalProfit.toLocaleString() }}</p>
+                                <p class="text-3xl md:text-4xl font-900 mono leading-none" :class="totalProfit >= 0 ? 'text-rose-500' : 'text-emerald-500'">{{ totalProfit >= 0 ? '+' : '' }}{{ totalProfit.toLocaleString() }}</p>
                                 <span class="text-sm font-black px-2 py-1 rounded-md" :class="totalProfit >= 0 ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-600'">ROI: {{ totalReturnRate }}%</span>
                             </div>
                         </div>
@@ -663,19 +687,19 @@
                 </div>
             </div>
             
-            <div class="flex-1 glass rounded-[2rem] p-1 flex flex-col overflow-hidden shadow-sm h-auto border border-slate-200">
-                <div class="custom-scrollbar flex-1 px-3 md:px-6 py-4">
+            <div class="flex-1 glass rounded-[1.25rem] p-1 flex flex-col overflow-hidden shadow-sm h-auto border border-slate-200">
+                <div class="custom-scrollbar flex-1 px-3 md:px-4 py-2">
                     <table class="w-full text-left">
                         <thead>
                             <tr>
                                 <th class="w-12 text-center hidden-mobile md:table-cell">排序</th>
                                 <th class="pl-2 md:pl-4">代碼 / 名稱</th>
-                                <th class="text-center text-blue-600">現價</th>
+                                <th class="text-center text-black-800">現價</th>
                                 <th class="text-center w-[120px] hidden-mobile md:table-cell">配置權重</th>
                                 <th class="text-center hidden-mobile md:table-cell">持有股數 / 成本</th>
                                 <th class="text-center hidden-mobile md:table-cell">帳面損益</th>
                                 <th class="text-center">水位再平衡</th>
-                                <th class="text-right pr-2 md:pr-6">管理</th>
+                                <th class="text-right pr-2 md:pr-4">管理</th>
                             </tr>
                         </thead>
                         <tbody class="font-mono">
@@ -684,31 +708,33 @@
                                     <div class="drag-handle mx-auto" draggable="true" @dragstart.stop="dragStart(index, $event)">⋮⋮</div>
                                 </td>
                                 <td class="pl-2 md:pl-4">
-                                    <div v-if="editIndex !== index" class="flex flex-col md:flex-row md:items-center text-base text-slate-800">
-                                        <span class="font-900 tracking-tight w-16 shrink-0">{{ item.code }}</span>
+                                    <div v-if="editIndex !== index" class="flex flex-col md:flex-row md:items-center text-sm md:text-base text-slate-800">
+                                        <span class="font-900 w-14 shrink-0">{{ item.code }}</span>
                                         <span class="text-slate-300 mx-2 font-light hidden md:inline">|</span>
-                                        <span class="font-bold truncate text-sm md:text-base flex items-center">
+                                        <span class="font-bold truncate flex items-center text-sm">
                                             <span class="status-dot" :class="item.status === 'error' ? 'status-err' : (item.status === 'loading' ? 'status-warn' : 'status-ok')"></span>{{ item.name || 'SYNC...' }}
                                         </span>
                                     </div>
                                     <div v-else class="flex flex-col gap-1">
                                         <input v-model="item.code" @change="resetStockName(item)" type="text" class="edit-input !text-left !bg-white !border-slate-200 !w-24">
-                                        <span class="text-[9px] font-bold text-indigo-400 ml-1">代號 (例: 2330)</span>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <div class="font-900 text-blue-600 text-base md:text-lg">
+                                    <div class="font-900 text-blue-600 text-base">
                                         <div v-if="item.currentPrice">
                                             <span :class="item.status === 'error' ? 'text-rose-400' : 'text-blue-600'">{{ item.currentPrice.toLocaleString() }}</span>
                                             <button v-if="item.status === 'error'" @click.stop="fetchStockInfo(item)" class="ml-1 text-[9px] text-rose-500 hover:underline">↻</button>
                                         </div>
                                         <div v-else-if="item.status === 'error'" class="text-rose-500 text-sm flex flex-col items-center cursor-pointer" :title="item.errorMsg">
-                                            <span class="text-xs font-bold bg-rose-100 px-1 rounded">連線失敗</span>
-                                            <button @click.stop="fetchStockInfo(item)" class="bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full text-[9px] mt-1 hover:bg-rose-200">↻ 重試</button>
+                                            <span class="text-xs font-bold bg-rose-100 px-1 rounded">失敗</span>
+                                            <button @click.stop="fetchStockInfo(item)" class="bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full text-[10px] mt-1 hover:bg-rose-200">重試</button>
                                         </div>
                                         <span v-else class="text-slate-300">---</span>
                                     </div>
-                                    <div v-if="item.code === 'AU9901' && item.bias60" class="text-[9px] text-slate-400 font-bold mt-1 leading-tight hidden md:block">MA60: ${{ item.ma60_usd }}<br>乖離: <span :class="item.bias60 > 0 ? 'text-rose-500' : 'text-emerald-500'">{{ item.bias60.toFixed(2) }}%</span></div>
+                                    <div v-if="item.ma60" class="text-[10px] text-slate-1000 font-black mt-1 leading-tight hidden md:block">
+                                        60MA: {{ item.ma60.toLocaleString() }}<br>
+                                        乖離: <span :class="(item.bias60 || 0) > 0 ? 'text-rose-500' : 'text-emerald-500'">{{ (item.bias60 || 0).toFixed(2) }}%</span>
+                                    </div>
                                 </td>
                                 <td class="text-center hidden-mobile md:table-cell">
                                     <div class="flex flex-col items-center gap-1.5 px-2">
@@ -725,52 +751,51 @@
                                 </td>
                                 <td class="text-center hidden-mobile md:table-cell">
                                     <div v-if="editIndex === index" class="flex flex-col gap-1 items-center">
-                                        <input v-model.number="item.shares" @change="saveData" type="number" class="edit-input w-24 bg-white border border-slate-200" placeholder="股數">
-                                        <input v-model.number="item.avgPrice" @change="saveData" type="number" class="edit-input w-24 bg-white border border-slate-200 text-emerald-600" placeholder="成本">
+                                        <input v-model.number="item.shares" @change="saveData" type="number" class="edit-input w-20 bg-white border border-slate-200" placeholder="股數">
+                                        <input v-model.number="item.avgPrice" @change="saveData" type="number" class="edit-input w-20 bg-white border border-slate-200 text-emerald-600" placeholder="成本">
                                     </div>
                                     <div v-else class="flex flex-col items-center">
-                                        <span class="text-slate-700 font-black text-sm">{{ item.shares.toLocaleString() }} <span class="text-[10px] text-slate-400 font-medium">股</span></span>
-                                        <span class="text-[11px] text-slate-400 font-bold mt-0.5">@ {{ (item.avgPrice || 0).toLocaleString() }}</span>
+                                        <span class="text-slate-700 font-black text-sm">{{ item.shares.toLocaleString() }} <span class="text-[9px] text-slate-400 font-medium">股</span></span>
+                                        <span class="text-[10px] text-slate-400 font-bold mt-0.5">@ {{ (item.avgPrice || 0).toLocaleString() }}</span>
                                     </div>
                                 </td>
                                 <td class="text-center hidden-mobile md:table-cell">
                                     <div class="flex flex-col items-center">
                                         <div class="font-900 text-sm tracking-tight" :class="(item.currentPrice - item.avgPrice) >= 0 ? 'text-rose-500' : 'text-emerald-500'">{{ (item.currentPrice - item.avgPrice) >= 0 ? '+' : '' }}{{ Math.round((item.currentPrice - item.avgPrice) * item.shares).toLocaleString() }}</div>
-                                        <div class="text-[10px] font-black mt-1 px-2 py-0.5 rounded-md flex items-center shadow-sm" :class="(item.currentPrice - item.avgPrice) >= 0 ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'">{{ calculateROI(item) }}%</div>
+                                        <div class="text-[10px] font-black mt-1 px-2 py-0.5 rounded flex items-center" :class="(item.currentPrice - item.avgPrice) >= 0 ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'">{{ calculateROI(item) }}%</div>
                                     </div>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <div class="flex flex-col items-center justify-center gap-1 min-h-[60px]">
-                                        <div v-if="item.code === 'AU9901' && item.ma60 && Math.abs(item.bias60) <= 5" class="px-2 py-1 bg-rose-50 text-rose-600 text-[9px] md:text-[10px] font-black rounded-lg shadow-sm whitespace-nowrap mb-1">60MA (±5%)</div>
-                                        
-                                        <div v-if="basicRebalanceSuggestion(item).type === 'BUY'" @click="executeBasicRebalance(basicRebalanceSuggestion(item), item)" class="tag tag-buy cursor-pointer hover:shadow-md transition-shadow text-[10px] md:text-xs">補足 {{ basicRebalanceSuggestion(item).shares }}</div>
-                                        <div v-else-if="basicRebalanceSuggestion(item).type === 'SELL'" @click="executeBasicRebalance(basicRebalanceSuggestion(item), item)" class="tag tag-sell cursor-pointer hover:shadow-md transition-shadow text-[10px] md:text-xs">減碼 {{ basicRebalanceSuggestion(item).shares }}</div>
-                                        <div v-else class="tag tag-hold text-[10px] md:text-xs">已達標</div>
+                                    <div class="flex flex-col items-center justify-center gap-1 min-h-[50px]">
+                                        <div v-if="item.ma60 && Math.abs(item.bias60 || 0) <= 5" class="px-1.5 py-0.5 bg-emerald-50 text-emerald-600 text-[9px] font-black rounded border border-emerald-200 mb-0.5">60MA 買點</div>
+                                        <div v-if="basicRebalanceSuggestion(item).type === 'BUY'" @click="executeBasicRebalance(basicRebalanceSuggestion(item), item)" class="tag tag-buy cursor-pointer text-[10px]">補足 {{ basicRebalanceSuggestion(item).shares }}</div>
+                                        <div v-else-if="basicRebalanceSuggestion(item).type === 'SELL'" @click="executeBasicRebalance(basicRebalanceSuggestion(item), item)" class="tag tag-sell cursor-pointer text-[10px]">減碼 {{ basicRebalanceSuggestion(item).shares }}</div>
+                                        <div v-else class="tag tag-hold text-[10px]">達標</div>
                                     </div>
                                 </td>
-                                <td class="text-right pr-2 md:pr-6">
-                                    <div class="flex justify-end items-center gap-2 opacity-100 md:opacity-30 group-hover:opacity-100 transition-opacity">
-                                        <button @click="editIndex = (editIndex === index ? null : index)" class="w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-white hover:text-indigo-500 transition-all">{{ editIndex === index ? '✔' : '✎' }}</button>
-                                        <button @click="removeStock(index)" class="w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500 transition-all">✕</button>
+                                <td class="text-right pr-2 md:pr-4">
+                                    <div class="flex justify-end items-center gap-1 opacity-100 md:opacity-30 group-hover:opacity-100 transition-opacity">
+                                        <button @click="editIndex = (editIndex === index ? null : index)" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-500 hover:bg-white hover:text-indigo-500 hover:border shadow-sm border-transparent transition-all">{{ editIndex === index ? '✔' : '✎' }}</button>
+                                        <button @click="removeStock(index)" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-500 hover:bg-rose-50 hover:text-rose-500 hover:border shadow-sm border-transparent transition-all">✕</button>
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="bg-indigo-50/30 border-2 border-dashed border-indigo-100 hover:bg-indigo-50/50 transition-colors">
+                            <tr class="bg-indigo-50/20 border-t border-dashed border-indigo-200">
                                 <td class="hidden-mobile md:table-cell"></td>
-                                <td class="pl-2 md:pl-4 py-4">
-                                    <input v-model="form.code" type="text" placeholder="+ 代號" class="edit-input !text-left !bg-white/80 !w-24 text-indigo-600 border border-slate-200" @keyup.enter="handleSave">
+                                <td class="pl-2 md:pl-4 py-3">
+                                    <input v-model="form.code" type="text" placeholder="+ 新增代號" class="edit-input !text-left !bg-white/80 !w-24 text-indigo-600 border border-slate-200" @keyup.enter="handleSave">
                                 </td>
                                 <td class="hidden-mobile md:table-cell"></td>
-                                <td class="text-center py-4 hidden-mobile md:table-cell">
+                                <td class="text-center py-3 hidden-mobile md:table-cell">
                                     <input v-model.number="form.targetRatio" type="number" placeholder="%" class="edit-input w-16 mx-auto !bg-white/80 text-indigo-600 border border-slate-200" @keyup.enter="handleSave">
                                 </td>
-                                <td class="text-center py-4 flex gap-2 justify-center hidden-mobile md:table-cell">
-                                    <input v-model.number="form.shares" type="number" placeholder="股數" class="edit-input w-24 !bg-white/80 border border-slate-200" @keyup.enter="handleSave">
-                                    <input v-model.number="form.avgPrice" type="number" placeholder="成本" class="edit-input w-24 !bg-white/80 text-emerald-600 border border-slate-200" @keyup.enter="handleSave">
+                                <td class="text-center py-3 flex gap-2 justify-center hidden-mobile md:table-cell">
+                                    <input v-model.number="form.shares" type="number" placeholder="股數" class="edit-input w-20 !bg-white/80 border border-slate-200" @keyup.enter="handleSave">
+                                    <input v-model.number="form.avgPrice" type="number" placeholder="成本" class="edit-input w-20 !bg-white/80 text-emerald-600 border border-slate-200" @keyup.enter="handleSave">
                                 </td>
                                 <td colspan="2" class="hidden-mobile md:table-cell"></td>
-                                <td class="text-right pr-2 md:pr-6 py-4">
-                                    <button @click="handleSave" class="bg-indigo-600 text-white text-xs font-black px-4 py-2 rounded-xl hover:bg-indigo-700 shadow-md transition-all whitespace-nowrap">加入</button>
+                                <td class="text-right pr-2 md:pr-4 py-3">
+                                    <button @click="handleSave" class="bg-indigo-600 text-white text-xs font-black px-3 py-1.5 rounded hover:bg-indigo-700 shadow transition-all">加入</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -904,7 +929,7 @@
                                     :key="depositLogs.indexOf(log)" 
                                     @drop="dragDropLog(log)" 
                                     @dragover.prevent
-                                    class="hover:bg-slate-50 transition-all rounded-xl border-b border-slate-50 last:border-0 group"
+                                    class="hover:bg-slate-50 transition-all border-b border-slate-100 last:border-0 group"
                                     :class="{ 'opacity-50': dragLog === log }">
                                     
                                     <td class="text-center">
@@ -913,7 +938,7 @@
                                              @dragstart.stop="dragStartLog(log, $event)">⋮⋮</div>
                                     </td>
                                     
-                                    <td class="pl-3 py-3">
+                                    <td class="pl-3 py-2">
                                         <div v-if="editDepositIndex !== depositLogs.indexOf(log)">
                                             <div class="flex flex-col">
                                                 <span v-if="log.type === 'adjustment'" class="text-[9px] font-black text-slate-500 bg-slate-100 px-1 py-0.5 rounded w-fit mb-0.5">調節</span>
@@ -938,10 +963,10 @@
                                     
                                     <td class="text-right pr-2">
                                         <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity" :class="{'opacity-100': editDepositIndex === depositLogs.indexOf(log)}">
-                                            <button v-if="editDepositIndex !== depositLogs.indexOf(log)" @click="editDepositIndex = depositLogs.indexOf(log)" class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-white hover:text-emerald-500 transition-all text-xs">✎</button>
-                                            <button v-else @click="saveLog()" class="w-6 h-6 rounded-full flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-600 transition-all text-xs">✔</button>
+                                            <button v-if="editDepositIndex !== depositLogs.indexOf(log)" @click="editDepositIndex = depositLogs.indexOf(log)" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-white hover:text-emerald-500 hover:shadow-sm transition-all text-xs">✎</button>
+                                            <button v-else @click="saveLog()" class="w-6 h-6 rounded flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm transition-all text-xs">✔</button>
                                             
-                                            <button @click="removeDeposit(depositLogs.indexOf(log))" class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500 transition-all text-xs">✕</button>
+                                            <button @click="removeDeposit(depositLogs.indexOf(log))" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500 hover:shadow-sm transition-all text-xs">✕</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -970,7 +995,7 @@
                                     :key="depositLogs.indexOf(log)" 
                                     @drop="dragDropLog(log)" 
                                     @dragover.prevent
-                                    class="hover:bg-slate-50 transition-all rounded-xl border-b border-slate-50 last:border-0 group"
+                                    class="hover:bg-slate-50 transition-all border-b border-slate-100 last:border-0 group"
                                     :class="{ 'opacity-50': dragLog === log }">
                                     
                                     <td class="text-center">
@@ -979,7 +1004,7 @@
                                              @dragstart.stop="dragStartLog(log, $event)">⋮⋮</div>
                                     </td>
                                     
-                                    <td class="pl-3 py-3">
+                                    <td class="pl-3 py-2">
                                         <div v-if="editDepositIndex !== depositLogs.indexOf(log)">
                                             <div class="flex flex-col">
                                                 <span class="text-[9px] font-black text-indigo-500 bg-indigo-50 px-1.5 py-0.5 rounded w-fit mb-0.5">配息</span>
@@ -1003,10 +1028,10 @@
                                     
                                     <td class="text-right pr-2">
                                         <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity" :class="{'opacity-100': editDepositIndex === depositLogs.indexOf(log)}">
-                                            <button v-if="editDepositIndex !== depositLogs.indexOf(log)" @click="editDepositIndex = depositLogs.indexOf(log)" class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-white hover:text-indigo-500 transition-all text-xs">✎</button>
-                                            <button v-else @click="saveLog()" class="w-6 h-6 rounded-full flex items-center justify-center bg-indigo-500 text-white hover:bg-indigo-600 transition-all text-xs">✔</button>
+                                            <button v-if="editDepositIndex !== depositLogs.indexOf(log)" @click="editDepositIndex = depositLogs.indexOf(log)" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-white hover:text-indigo-500 hover:shadow-sm transition-all text-xs">✎</button>
+                                            <button v-else @click="saveLog()" class="w-6 h-6 rounded flex items-center justify-center bg-indigo-500 text-white hover:bg-indigo-600 shadow-sm transition-all text-xs">✔</button>
                                             
-                                            <button @click="removeDeposit(depositLogs.indexOf(log))" class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500 transition-all text-xs">✕</button>
+                                            <button @click="removeDeposit(depositLogs.indexOf(log))" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500 hover:shadow-sm transition-all text-xs">✕</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -1017,85 +1042,118 @@
             </div>
         </div>
 
-        <div v-if="currentView === 'backup'" class="custom-scrollbar p-2 md:p-6 animate-in fade-in duration-500 h-full overflow-y-auto w-full bg-slate-50/50 rounded-3xl border border-slate-100 mt-2">
-            <div class="max-w-[1200px] mx-auto flex flex-col gap-6 h-full pb-4">
+        <div v-if="currentView === 'backup'" class="custom-scrollbar flex-1 w-full pb-8">
+            <div class="flex flex-col gap-4 pt-2 px-1 max-w-[1600px] mx-auto">
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0 pt-4">
+                <div class="flex justify-between items-end border-b-2 border-slate-300 pb-2">
+                    <div class="flex items-baseline gap-3">
+                        <h2 class="text-xl font-900 text-slate-800 tracking-tight">System Settings</h2>
+                        <span class="text-[11px] font-bold text-slate-500 hidden sm:block">系統設定與雲端備份</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-2">
                     
-                    <div class="flex flex-col gap-6 h-full">
-                        <div class="card-institutional border-l-[6px] border-l-emerald-500 flex-1 flex flex-col justify-center">
-                            <h3 class="text-lg font-black text-slate-800 mb-2">API 金鑰設定 (FinMind)</h3>
-                            <p class="text-xs text-slate-500 font-bold mb-5">更新您的股價資料來源 Token (用於抓取台股中文名稱)。</p>
-                            
-                            <div class="space-y-4">
+                    <div class="lg:col-span-5 flex flex-col gap-4">
+                        
+                        <div class="bg-white border border-slate-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex-1">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+                            <div class="pl-2">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-sm">🔑</span>
+                                    <h3 class="text-sm font-black text-slate-800 tracking-wide">API 資料源授權 (FinMind)</h3>
+                                </div>
+                                <p class="text-[10px] text-slate-500 font-bold mb-4 leading-relaxed">為解決 Yahoo API 限制，請配置 FinMind Token 以獲取台股正確中文名稱與黃金歷史資料。</p>
+                                
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="text-[9px] font-black text-slate-400 mb-1 block uppercase tracking-widest">FinMind Token</label>
+                                        <input v-model="token" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono font-bold text-slate-800 outline-none focus:border-emerald-400 focus:bg-white transition-all" placeholder="輸入您的新 Token...">
+                                        <a href="https://finmind.github.io/" target="_blank" class="text-[9px] font-black text-emerald-500 hover:text-emerald-600 mt-1.5 inline-block underline decoration-emerald-200 underline-offset-2">前往 FinMind 官網免費申請</a>
+                                    </div>
+                                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                                        <span class="text-[10px] font-black text-emerald-500">{{ apiStatusMsg }}</span>
+                                        <button @click="saveApiSettings" class="bg-emerald-50 text-emerald-600 border border-emerald-200 px-4 py-1.5 rounded-lg text-xs font-black hover:bg-emerald-500 hover:text-white transition-all shadow-sm">儲存並重整</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-rose-500"></div>
+                            <div class="pl-2">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-sm">⚠️</span>
+                                    <h3 class="text-sm font-black text-slate-800 tracking-wide">本地端資料重置</h3>
+                                </div>
+                                <p class="text-[10px] text-slate-500 font-bold mb-4">清空當前設備的紀錄。請確認已上傳備份至雲端，此操作不可逆。</p>
+                                
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button @click="clearLogs" class="bg-amber-50 text-amber-600 border border-amber-200 px-3 py-2.5 rounded-lg text-xs font-black hover:bg-amber-500 hover:text-white transition-all text-center shadow-sm">清空帳務流水</button>
+                                    <button @click="factoryReset" class="bg-rose-50 text-rose-600 border border-rose-200 px-3 py-2.5 rounded-lg text-xs font-black hover:bg-rose-600 hover:text-white transition-all text-center shadow-sm">恢復出廠設定</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="lg:col-span-7 bg-white border border-slate-300 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                        <div class="pl-2 flex-1 flex flex-col">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-sm">☁️</span>
+                                <h3 class="text-sm font-black text-slate-800 tracking-wide">GitHub 雲端跨裝置同步</h3>
+                            </div>
+                            <p class="text-[10px] text-slate-500 font-bold mb-5 leading-relaxed">透過 GitHub Gist 作為您的免費私人資料庫，實現手機與電腦端的無縫對帳。</p>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label class="text-[10px] font-bold text-slate-400 mb-1 block uppercase tracking-widest">FinMind API Token</label>
-                                    <input v-model="token" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all" placeholder="輸入您的新 Token...">
-                                    <a href="https://finmind.github.io/" target="_blank" class="text-[10px] font-bold text-emerald-500 hover:text-emerald-600 mt-1.5 inline-block underline decoration-emerald-200 underline-offset-2">前往 FinMind 官網申請</a>
+                                    <label class="text-[9px] font-black text-slate-400 mb-1 block uppercase tracking-widest">Personal Access Token (PAT)</label>
+                                    <input v-model="githubToken" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono font-bold text-slate-800 outline-none focus:border-indigo-400 focus:bg-white transition-all" placeholder="ghp_xxxxxxxxxxxx">
+                                    <a href="https://github.com/settings/tokens" target="_blank" class="text-[9px] font-black text-indigo-500 hover:text-indigo-600 mt-1.5 inline-block underline decoration-indigo-200 underline-offset-2">點此申請 (需勾選 gist 權限)</a>
                                 </div>
-                                <div class="flex items-center gap-3 pt-2">
-                                    <button @click="saveApiSettings" class="bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-xs font-black hover:bg-emerald-600 shadow-md transition-all">儲存並重整數據</button>
-                                    <span v-if="apiStatusMsg" class="text-xs font-bold text-emerald-500">{{ apiStatusMsg }}</span>
+                                <div>
+                                    <label class="text-[9px] font-black text-slate-400 mb-1 block uppercase tracking-widest">Gist ID (首次上傳請留空)</label>
+                                    <input v-model="gistId" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono font-bold text-slate-800 outline-none focus:border-indigo-400 focus:bg-white transition-all" placeholder="由系統自動生成...">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card-institutional border-l-[6px] border-l-rose-500 shrink-0">
-                            <h3 class="text-lg font-black text-slate-800 mb-2">資料管理與重置</h3>
-                            <p class="text-xs text-slate-500 font-bold mb-5">清空本地端紀錄，請謹慎操作。</p>
-                            <div class="flex gap-4">
-                                <button @click="clearLogs" class="flex-1 px-4 py-3 bg-slate-100 text-slate-500 rounded-xl text-xs font-black hover:bg-rose-50 hover:text-rose-600 transition-colors border border-slate-200">清空流水帳</button>
-                                <button @click="factoryReset" class="flex-1 px-4 py-3 bg-rose-50 text-rose-600 rounded-xl text-xs font-black hover:bg-rose-500 hover:text-white transition-all shadow-sm border border-rose-100 hover:border-rose-500">恢復出廠設定</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-institutional border-l-[6px] border-l-indigo-500 flex flex-col h-full">
-                        <h3 class="text-lg font-black text-slate-800 mb-2">GitHub 雲端同步</h3>
-                        <p class="text-xs text-slate-500 font-bold mb-6">透過 GitHub Gist 跨裝置同步您的投資組合與帳務資料。</p>
-
-                        <div class="space-y-5 flex-1 flex flex-col justify-center">
-                            <div>
-                                <label class="text-[10px] font-bold text-slate-400 mb-1 block uppercase tracking-widest">Personal Access Token (PAT)</label>
-                                <input v-model="githubToken" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all" placeholder="ghp_xxxxxxxxxxxx">
-                                <a href="https://github.com/settings/tokens" target="_blank" class="text-[10px] font-bold text-indigo-500 hover:text-indigo-600 mt-1.5 inline-block underline decoration-indigo-200 underline-offset-2">點此申請 Token (需勾選 gist 權限)</a>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-bold text-slate-400 mb-1 block uppercase tracking-widest">Gist ID (選填)</label>
-                                <input v-model="gistId" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 transition-all" placeholder="若無，上傳時將自動建立">
-                            </div>
-                            <div class="flex items-center gap-3 pt-1 border-b border-slate-100 pb-6">
-                                <button @click="saveGithubSettings" class="bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs font-black hover:bg-slate-700 transition-colors shadow-md">記憶授權設定</button>
-                                <span v-if="syncStatus && syncStatus.includes('設定')" class="text-xs font-bold text-emerald-500">{{ syncStatus }}</span>
+                            <div class="flex items-center justify-between pb-5 mb-5 border-b border-slate-100">
+                                <span class="text-[10px] font-black text-indigo-500">{{ syncStatus && syncStatus.includes('設定') ? syncStatus : '' }}</span>
+                                <button @click="saveGithubSettings" class="bg-slate-100 text-slate-600 border border-slate-200 px-4 py-1.5 rounded-lg text-xs font-black hover:bg-slate-200 transition-colors shadow-sm">記憶本機授權</button>
                             </div>
 
-                            <div class="flex gap-4 pt-2">
-                                <button @click="uploadToGist" class="group relative flex-1 bg-indigo-500 text-white p-5 rounded-2xl shadow-md hover:bg-indigo-600 hover:shadow-lg transition-all flex flex-col items-center justify-center overflow-hidden min-h-[100px]">
-                                    <div class="relative z-10 flex flex-col items-center gap-1.5">
-                                        <span class="text-base font-black tracking-widest uppercase">Upload</span>
-                                        <span class="text-[11px] opacity-90 font-bold">上傳並覆蓋雲端</span>
+                            <div v-if="syncStatus && !syncStatus.includes('設定')" class="text-center text-xs font-black mb-3" :class="syncStatus.includes('成功') ? 'text-emerald-500' : 'text-rose-500'">
+                                執行狀態: {{ syncStatus }}
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mt-auto">
+                                <button @click="uploadToGist" class="relative group bg-slate-900 border border-slate-800 hover:bg-indigo-600 hover:border-indigo-500 text-white p-4 rounded-xl transition-all shadow-md overflow-hidden flex flex-col items-center justify-center min-h-[100px]">
+                                    <div class="flex flex-col items-center gap-1.5 z-10 transition-opacity" :class="{'opacity-0': isSyncing && syncStatus.includes('上傳')}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                        <span class="text-xs font-black tracking-widest uppercase">上傳並覆蓋雲端</span>
                                     </div>
-                                    <div v-if="isSyncing && syncStatus.includes('上傳')" class="absolute inset-0 bg-indigo-600 flex items-center justify-center z-20">
-                                        <span class="text-2xl animate-spin">↻</span>
+                                    <div v-if="isSyncing && syncStatus.includes('上傳')" class="absolute inset-0 flex flex-col items-center justify-center z-20 bg-indigo-600">
+                                        <span class="text-2xl animate-spin mb-1">↻</span>
+                                        <span class="text-[9px] font-black tracking-widest uppercase">UPLOADING...</span>
                                     </div>
                                 </button>
 
-                                <button @click="downloadFromGist" class="group relative flex-1 bg-white border-2 border-indigo-100 text-indigo-600 p-5 rounded-2xl hover:bg-indigo-50 transition-all flex flex-col items-center justify-center min-h-[100px]">
-                                    <div class="flex flex-col items-center gap-1.5">
-                                        <span class="text-base font-black tracking-widest uppercase">Download</span>
-                                        <span class="text-[11px] opacity-70 font-bold">自雲端下載還原</span>
+                                <button @click="downloadFromGist" class="relative group bg-white border-2 border-indigo-100 hover:bg-indigo-50 hover:border-indigo-300 text-indigo-600 p-4 rounded-xl transition-all shadow-sm flex flex-col items-center justify-center min-h-[100px] overflow-hidden">
+                                    <div class="flex flex-col items-center gap-1.5 z-10 transition-opacity" :class="{'opacity-0': isSyncing && syncStatus.includes('下載')}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                                        <span class="text-xs font-black tracking-widest uppercase">從雲端下載還原</span>
                                     </div>
-                                    <div v-if="isSyncing && syncStatus.includes('下載')" class="absolute inset-0 bg-white/90 flex items-center justify-center z-20">
-                                        <span class="text-2xl animate-spin text-indigo-500">↻</span>
+                                    <div v-if="isSyncing && syncStatus.includes('下載')" class="absolute inset-0 flex flex-col items-center justify-center z-20 bg-indigo-50">
+                                        <span class="text-2xl animate-spin text-indigo-500 mb-1">↻</span>
+                                        <span class="text-[9px] font-black tracking-widest uppercase text-indigo-600">DOWNLOADING...</span>
                                     </div>
                                 </button>
                             </div>
-
-                            <div v-if="syncStatus && !syncStatus.includes('設定')" class="text-center text-xs font-black mt-2" :class="syncStatus.includes('成功') ? 'text-emerald-500' : 'text-rose-500'">
-                                狀態: {{ syncStatus }}
-                            </div>
+                            
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1104,7 +1162,7 @@
             <div class="max-w-[1400px] mx-auto flex flex-col gap-10 pb-12 pt-4">
 
                 <div class="text-center mb-4">
-                    <h2 class="text-3xl md:text-4xl font-900 text-slate-800 tracking-tighter uppercase font-mono">Terminal Pro <span class="text-indigo-600">V4</span></h2>
+                    <h2 class="text-3xl md:text-4xl font-900 text-slate-800 tracking-tighter uppercase font-mono">Terminal Pro <span class="text-indigo-600">V5.0</span></h2>
                     <p class="text-sm font-bold text-slate-500 mt-3">掌握雙軌風險驗證、AI 降載接管與雲端對帳的全方位資產管理系統</p>
                 </div>
 
@@ -1119,7 +1177,7 @@
                             <li class="flex gap-2"><span class="text-indigo-500">▪</span> <strong>新增持股：</strong>在列表最下方輸入股票代號、目標權重(%)、股數與成本，點擊「加入」。支援台股(如: 2330)、美股指數(如: ^VIX) 與黃金(輸入 AU9901)。</li>
                             <li class="flex gap-2"><span class="text-indigo-500">▪</span> <strong>拖曳排序：</strong>滑鼠按住列表左側的 <span class="text-slate-400 font-mono">⋮⋮</span> 圖示，即可上下拖曳自訂股票的顯示順序。</li>
                             <li class="flex gap-2"><span class="text-indigo-500">▪</span> <strong>編輯與刪除：</strong>點擊右側的 ✎ 可修改股數、成本與目標權重；點擊 ✕ 可刪除該檔股票。</li>
-                            <li class="flex gap-2"><span class="text-indigo-500">▪</span> <strong>基礎再平衡 (5% 靜噪)：</strong>系統會自動比對「當前權重」與「目標權重」。若誤差大於 5%，會出現 <span class="bg-rose-50 text-rose-600 px-1 rounded">減碼</span> 或 <span class="bg-emerald-50 text-emerald-600 px-1 rounded">補足</span> 按鈕，點擊即可自動扣除/增加現金池完成記帳。</li>
+                            <li class="flex gap-2"><span class="text-indigo-500">▪</span> <strong>全域 60MA 偵測：</strong>系統會自動抓取所有持股的過去 1 年資料，計算出最精準的季線(60日還原權息MA)與乖離率。若乖離小於 5%，會出現黃金買點提示標籤。</li>
                         </ul>
                     </div>
 
@@ -1131,7 +1189,7 @@
                         <ul class="text-xs text-slate-600 space-y-4 font-bold leading-relaxed">
                             <li class="flex gap-2"><span class="text-emerald-500">▪</span> <strong>雙層監控架構：</strong>分為「動能與情緒 (賺錢訊號)」與「系統性風險 (保命預警)」兩大層級。系統每 30 秒自動抓取 Yahoo Finance 最新報價。</li>
                             <li class="flex gap-2"><span class="text-emerald-500">▪</span> <strong>殖利率曲線矩陣 (雙重驗證)：</strong>整合市場派 (10Y-2Y) 與央行派 (10Y-3M)。當 10Y-2Y 率先轉正時觸發「黃燈警戒」；若 10Y-3M 也跟著轉正，則觸發「紅燈死刑」，宣判海嘯到來。</li>
-                            <li class="flex gap-2"><span class="text-emerald-500">▪</span> <strong>實質利率 (TIPS)：</strong>資金成本的照妖鏡。若高於 2.0%，代表市場流動性極度緊縮，高風險資產將面臨強大拋售壓力。</li>
+                            <li class="flex gap-2"><span class="text-emerald-500">▪</span> <strong>統一血條設計：</strong>所有指標血條皆設計為「左側偏綠 (買點/安全)」至「右側偏紅 (賣點/危險)」，讓大腦直覺判斷，不需反向思考。</li>
                         </ul>
                     </div>
 
@@ -1188,7 +1246,7 @@
             </div>
         </div>
 
-        <div class="fixed bottom-4 right-4 text-[10px] text-slate-400/50 font-black tracking-widest pointer-events-none z-0">2026/03/03 V4 by Leon</div>
+        <div class="fixed bottom-4 right-4 text-[10px] text-slate-400/50 font-black tracking-widest pointer-events-none z-0">2026/03/05 V5.0 by Leon</div>
     </div>
 
     <script>
@@ -1249,6 +1307,7 @@
                     form: { code: '', shares: null, avgPrice: null, targetRatio: null },
                     hoverInfo: { label: '', price: '', ratio: '' }, 
                     editIndex: null, 
+                    chartInstance: null,
                     indices: { 
                         cnn: safeIndices.cnn, 
                         twFear: safeIndices.twFear, 
@@ -1271,7 +1330,72 @@
                     gistId: safeGistId,
                     isSyncing: false,
                     syncStatus: '',
-                    colors: ['#818cf8', '#34d399', '#f472b6', '#fbbf24', '#60a5fa', '#a78bfa', '#2dd4bf', '#fb7185']
+                    colors: ['#818cf8', '#34d399', '#f472b6', '#fbbf24', '#60a5fa', '#a78bfa', '#2dd4bf', '#fb7185'],
+                    // 控制精靈狀態的變數
+                    isAiHelperOpen: false,
+                    isAiTyping: false,
+                    aiMessages: [
+                        { role: 'assistant', content: '您好！我是您的專屬系統導航精靈 🤖\n不知道從哪裡開始嗎？點擊下方的問題，讓我為您介紹系統功能！' }
+                    ],
+        
+                   // 內建的 Q&A 知識庫 (擴充完整版)
+                    aiQuestions: [
+                        { 
+                            id: 1, 
+                            title: '名詞解釋：什麼是「10Y-2Y / 10Y-3M 利差」？', 
+                            answer: '📉 **殖利率曲線倒掛 (Yield Curve Inversion)**<br><br>正常情況下，長天期(10年)公債的利息應該比短天期(2年或3個月)高。當「短期利率高於長期利率」就稱為倒掛，代表市場預期未來經濟衰退。<br><br>⚠️ **系統警告邏輯：**<br>當利差「由負轉正」的那一刻，通常是聯準會因為經濟出事而被迫緊急降息，這是系統設定中最危險的「海嘯紅燈訊號」。' 
+                        },
+                        { 
+                            id: 2, 
+                            title: '名詞解釋：什麼是「實質利率 (TIPS)」？', 
+                            answer: '🏦 **實質利率 (Real Yield)**<br><br>計算方式是「名目利率減去通膨預期」。它代表市場上資金的「真實無風險借貸成本」。<br><br>💡 **對股市的影響：**<br>當實質利率飆高（系統設定大於 2.0%），代表放在銀行的無風險報酬很香，熱錢會從股市抽離，這對科技股與成長股的估值殺傷力最大，屬於「流動性枯竭」的警訊。' 
+                        },
+                        { 
+                            id: 3, 
+                            title: '名詞解釋：什麼是「60MA 乖離率」？', 
+                            answer: '📊 **季線乖離率 (Moving Average Bias)**<br><br>「60MA」就是過去 60 個交易日的平均收盤價（俗稱季線，代表中期主力成本）。<br>「乖離率」是指現在的股價距離季線有多遠。<br><br>🎯 **實戰應用：**<br>系統利用大盤 (0050)、半導體 (SOX) 的乖離率來衡量市場情緒。<br>正乖離過大 = 散戶瘋狂追高（該逢高減碼）。<br>負乖離過大 = 市場恐慌超跌（鑽石買點浮現）。' 
+                        },
+                        { 
+                            id: 4, 
+                            title: '名詞解釋：什麼是「USD/TWD 匯率乖離」？', 
+                            answer: '💵 **美元/台幣匯率乖離 (外資動向)**<br><br>匯率的季線乖離可以看出外資熱錢的流向。系統設定中，正乖離代表美元強、台幣貶（外資匯出），對台股是壓力；負乖離代表台幣強（外資匯入），是股市活水。<br><br>💡 **實戰應用：**<br>當台股乖離過高，且台幣開始重貶（轉為紅燈），代表外資在獲利了結，這時 AI 會大幅調高風險警戒。' 
+                        },
+                        { 
+                            id: 5, 
+                            title: '名詞解釋：什麼是「美股/台股情緒指數」？', 
+                            answer: '🎭 **市場情緒指數 (Fear & Greed Index)**<br><br>整合了市場動能、避險需求、選擇權買賣權比例等多項數據的綜合指標（0-100分）。<br><br>💡 **巴菲特名言：**「別人恐懼我貪婪」。<br>當指數小於 25（極度恐懼），通常是市場遭到錯殺的長線買點；當指數大於 75（極度貪婪），則代表散戶全面進場，隨時有割韭菜的風險。' 
+                        },
+                        { 
+                            id: 6, 
+                            title: '名詞解釋：什麼是「VIX 恐慌指數」？', 
+                            answer: '😨 **VIX 波動率指數 (Volatility Index)**<br><br>反映標普 500 指數選擇權的隱含波動率，也就是市場對未來一個月股市波動的預期。<br><br>💡 **逆向思考：**<br>數值越高 (如大於 25) 代表市場極度恐慌，通常伴隨股價低點，是買進訊號。<br>數值越低 (如小於 15) 代表市場太過安逸，隨時可能出現回檔修正。' 
+                        },
+                        { 
+                            id: 7, 
+                            title: '名詞解釋：什麼是「HEAT SCORE」與「宏觀覆寫」？', 
+                            answer: '🔥 **HEAT SCORE (情緒熱度總分)**<br>系統將 VIX、乖離率、CNN情緒等指標加權算出的 0-100 分。分數越低代表恐慌（適合買進），分數高代表貪婪（適合賣出）。<br><br>🚨 **宏觀覆寫 (Macro Override)**<br>這是系統的**終極保命機制**。當左腦的「系統性風險(如殖利率轉正)」飆高時，AI 會強制接管，**無視右腦的貪婪動能**，無條件啟動防禦模式要求您提高現金避險！' 
+                        },
+                        { 
+                            id: 8, 
+                            title: '系統操作：如何新增持股或自動對帳？', 
+                            answer: '💡 **新增持股：**<br>在「資產配置」面板最下方輸入代號、目標權重與成本即可加入。按住左側 ⋮⋮ 可拖曳排序。<br><br>💡 **自動對帳：**<br>在「帳務總覽」輸入您的入金與配息。系統會自動將「歷史總入金」與您的「券商交割餘額+庫存成本」進行比對，若數字一致會亮起綠燈，防止帳目出錯！' 
+                        },
+                        { 
+                            id: 9, 
+                            title: '系統操作：為什麼可以輸入「AU9901」買黃金？', 
+                            answer: '🥇 **黃金現貨 (臺銀金)**<br><br>系統特別為避險資產寫了客製化邏輯！只要在新增持股輸入 `AU9901`，系統會自動抓取國際金價 (GC=F) 乘上美元匯率 (TWD=X) 並換算成台灣的「台錢」報價。<br><br>🛡️ **配置建議：**<br>當宏觀風險（如殖利率轉正）亮紅燈時，適度拉高黃金的「目標權重」，能有效對沖股票部位的下跌風險。' 
+                        },
+                        { 
+                            id: 10, 
+                            title: '系統操作：什麼是「目標權重」與「水位再平衡」？', 
+                            answer: '⚖️ **動態再平衡 (Portfolio Rebalancing)**<br><br>您可以為每檔資產設定一個「目標權重 (Target Ratio)」。例如設定 0050 為 40%。<br>系統會根據您當前的「股票總值 + 現金池」，精準算出您現在**應該持有**多少股。<br><br>💡 **操作方式：**<br>當股價大漲導致權重超標 (>5%)，右側會出現紅色的「減碼」提示；下跌導致低於目標時，會出現綠色的「補足」提示。點擊即可自動完成買賣記帳！' 
+                        },
+                        { 
+                            id: 11, 
+                            title: '系統操作：我的資料存在哪裡？會不見嗎？', 
+                            answer: '🔒 **無伺服器架構 (Local Storage)**<br><br>為了 100% 保障您的財務隱私，系統**沒有**後台資料庫，所有數據都僅存在您當下使用的瀏覽器快取中。<br><br>⚠️ **非常重要：**<br>如果您清除瀏覽器資料或使用無痕模式，資料就會消失！請務必到「系統備份」綁定 GitHub Token，養成定期點擊 [上傳並覆蓋雲端] 的好習慣，就能在手機和電腦間無縫同步。' 
+                        }
+                    ],
                 }
             },
             watch: { 
@@ -1330,25 +1454,23 @@
                     let score = 0;
                     let warnings = [];
 
-                    // 指標 1: 殖利率曲線雙重驗證 (Double Confirmation)
-                    const yc2 = this.indices.yieldCurve;   // 10Y-2Y
-                    const yc3 = this.indices.yieldCurve3M; // 10Y-3M
+                    const yc2 = this.indices.yieldCurve || 0;   
+                    const yc3 = this.indices.yieldCurve3M || 0; 
 
                     if (yc2 >= 0 && yc3 >= 0) {
-                        score += 60; // 雙轉正：死刑
+                        score += 60; 
                         warnings.push("長短天期全面轉正 (海嘯爆發)");
                     } else if (yc2 >= 0 && yc3 < 0) {
-                        score += 35; // 2Y轉正，但3M還沒：黃燈
+                        score += 35; 
                         warnings.push("2Y轉正警戒 (Fed準備降息)");
                     } else if (yc2 < 0 && yc2 > -0.2) {
-                        score += 20; // 正在解除倒掛
+                        score += 20; 
                         warnings.push("2Y曲線急劇陡峭中");
                     } else {
-                        score += 5;  // 深度倒掛 (相對安全)
+                        score += 5;  
                     }
 
-                    // 指標 2: 實質利率過高 (Liquidity Stress)
-                    const rr = this.indices.realRate;
+                    const rr = this.indices.realRate || 0;
                     if (rr > 2.0) {
                         score += 25;
                         warnings.push("資金成本極高 (流動性枯竭)");
@@ -1356,10 +1478,8 @@
                         score += 10;
                     }
 
-                    // 指標 3: 貪婪與價格背離 (Divergence)
                     const b = this.manualBias !== null ? this.manualBias : parseFloat(this.biasIndex || 0);
-                    // 如果 0050 乖離很高(很貴)，但 CNN 恐懼貪婪卻掉下來(大眾沒那麼嗨了) = 主力在偷偷出貨
-                    if (b > 10 && this.indices.cnn < 60) {
+                    if (b > 10 && (this.indices.cnn || 50) < 60) {
                         score += 15;
                         warnings.push("價量情緒背離 (主力撤退)");
                     }
@@ -1370,27 +1490,27 @@
                     };
                 },
 
-                aiStrategy() {
+                momentumScore() {
                     const b = this.manualBias !== null ? this.manualBias : parseFloat(this.biasIndex || 0);
                     const cnnVal = this.indices.cnn || 50; 
                     const twVal = this.indices.twFear || 50;
                     
                     let score0050 = 50;
                     const deadZone = 3.0; 
-                    if (b > deadZone) score0050 = 50 + ((b - deadZone) * 5.55); 
-                    else if (b < -deadZone) score0050 = 50 + ((b + deadZone) * 5.55);
+                    if (b > deadZone) score0050 = 50 + ((b - deadZone) * 4.16); 
+                    else if (b < -deadZone) score0050 = 50 + ((b + deadZone) * 4.16);
                     score0050 = Math.max(0, Math.min(100, score0050));
                     
                     let scoreSox = 50;
                     const soxB = this.indices.soxBias || 0;
-                    if (soxB > deadZone) scoreSox = 50 + ((soxB - deadZone) * 5.55);
-                    else if (soxB < -deadZone) scoreSox = 50 + ((soxB + deadZone) * 5.55);
+                    if (soxB > 5.0) scoreSox = 50 + ((soxB - 5.0) * 2.5);
+                    else if (soxB < -5.0) scoreSox = 50 + ((soxB + 5.0) * 2.5);
                     scoreSox = Math.max(0, Math.min(100, scoreSox));
 
                     let scoreUsdTwd = 50;
                     const usdTwdB = this.indices.usdtwdBias || 0;
-                    if (usdTwdB > 0.5) scoreUsdTwd = 50 - ((usdTwdB - 0.5) * 25);
-                    else if (usdTwdB < -0.5) scoreUsdTwd = 50 - ((usdTwdB + 0.5) * 25);
+                    if (usdTwdB > 0.5) scoreUsdTwd = 50 + ((usdTwdB - 0.5) * 20);
+                    else if (usdTwdB < -0.5) scoreUsdTwd = 50 + ((usdTwdB + 0.5) * 20);
                     scoreUsdTwd = Math.max(0, Math.min(100, scoreUsdTwd));
 
                     let scoreVix = 50;
@@ -1414,8 +1534,28 @@
                         (cnnVal * 0.15) + 
                         (twVal * 0.10);
 
-                    let baseScore = Math.round(weightedScore);
+                    const total = Math.round(weightedScore);
                     
+                    let status = '中立震盪';
+                    let colorClass = 'text-slate-400 bg-slate-400/10 border-slate-400/20';
+
+                    if (total >= 85) { status = '瘋狂貪婪 (危險)'; colorClass = 'text-rose-400 bg-rose-400/10 border-rose-400/20'; }
+                    else if (total >= 75) { status = '極度貪婪 (過熱)'; colorClass = 'text-rose-400 bg-rose-400/10 border-rose-400/20'; }
+                    else if (total >= 60) { status = '貪婪 (偏高)'; colorClass = 'text-amber-500 bg-amber-400/10 border-amber-400/20'; }
+                    else if (total <= 15) { status = '毀滅恐慌 (鑽石買點)'; colorClass = 'text-emerald-500 bg-emerald-400/10 border-emerald-400/20 shadow-[0_0_8px_rgba(16,185,129,0.5)]'; }
+                    else if (total <= 25) { status = '極度恐慌 (超跌)'; colorClass = 'text-emerald-500 bg-emerald-400/10 border-emerald-400/20'; }
+                    else if (total <= 40) { status = '恐慌 (低估)'; colorClass = 'text-emerald-400 bg-emerald-300/10 border-emerald-300/20'; }
+
+                    return { 
+                        total, 
+                        status, 
+                        colorClass,
+                        details: { vix: scoreVix, bias: score0050, cnn: cnnVal, tw: twVal, sox: scoreSox, usdtwd: scoreUsdTwd }
+                    };
+                },
+
+                aiStrategy() {
+                    let baseScore = this.momentumScore.total;
                     const macroRisk = this.macroRiskLevel.total;
                     let finalScore = baseScore;
                     let macroOverrideMsg = "";
@@ -1430,11 +1570,11 @@
                         }
                     }
 
+                    const b = this.manualBias !== null ? this.manualBias : parseFloat(this.biasIndex || 0);
                     let divergenceMsg = "";
-                    if (b > 8 && this.indices.vix > 20) divergenceMsg = "風險背離"; 
-                    if (b < -8 && this.indices.vix < 18 && this.indices.vix > 0) divergenceMsg = "起漲背離";
+                    if (b > 8 && (this.indices.vix || 0) > 20) divergenceMsg = "風險背離"; 
+                    if (b < -8 && (this.indices.vix || 0) < 18 && (this.indices.vix || 0) > 0) divergenceMsg = "起漲背離";
 
-                    const details = { vix: scoreVix, bias: score0050, cnn: cnnVal, tw: twVal, sox: scoreSox, usdtwd: scoreUsdTwd };
                     let strategyData = {};
                     let baseReason = "";
                     
@@ -1470,7 +1610,6 @@
                         score: finalScore,
                         originalScore: baseScore,
                         percent: strategyData.percent,
-                        details: details,
                         strategy: strategyData
                     };
                 },
@@ -1505,6 +1644,37 @@
             },
             methods: {
                 // =============== [Data Fetching] ===============
+                // // 處理使用者點擊問題後的對話流程
+                askAi(questionObj) {
+                    // 1. 將使用者的問題加入對話框
+                    this.aiMessages.push({ role: 'user', content: questionObj.title });
+                    this.scrollToAiBottom();
+                    
+                    // 2. 顯示機器人「正在輸入...」的打字動畫
+                    this.isAiTyping = true;
+                    
+                    // 3. 模擬思考延遲 (600毫秒) 後給出回答
+                    setTimeout(() => {
+                        this.isAiTyping = false;
+                        this.aiMessages.push({ role: 'assistant', content: questionObj.answer });
+                        this.scrollToAiBottom();
+                    }, 600);
+                },
+                
+                // 確保對話框永遠捲動到最新訊息的底部
+                scrollToAiBottom() {
+                    // $nextTick 確保 Vue 更新完 DOM 後才執行捲動
+                    this.$nextTick(() => {
+                        const box = this.$refs.aiChatBox;
+                        if (box) {
+                            box.scrollTo({
+                                top: box.scrollHeight,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                },
+
                 async fetchData(targetUrl) {
                     try {
                         const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
@@ -1519,6 +1689,7 @@
                 },
                 
                 async fetchVix() {
+                    
                     this.vixLoading = true;
                     try {
                         const target = `https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=5d`;
@@ -1542,13 +1713,53 @@
                         this.vixLoading = false;
                     }
                 },
+// 自動抓取 FRED 總經數據 (網頁爬蟲)
+                async fetchFredData(seriesId, stateKey) {
+                    try {
+                        const target = `https://fred.stlouisfed.org/series/${seriesId}`;
+                        const res = await this.fetchData(target);
+                        const html = await res.text();
+                        
+                        // FRED 的最新數值通常放在這個 span class 裡面
+                        const match = html.match(/<span class="series-meta-observation-value"[^>]*>([^<]+)<\/span>/);
+                        if (match && match[1]) {
+                            this.indices[stateKey] = parseFloat(match[1]);
+                            this.saveData();
+                        }
+                    } catch (e) {
+                        console.error(`Fetch FRED ${seriesId} Failed:`, e);
+                    }
+                },
 
+                // 自動抓取 CNN 恐懼與貪婪指數 (隱藏版 API)
+                async fetchCNNFearGreed() {
+                    try {
+                        // 這是 CNN 前端圖表在呼叫的真實 JSON API 節點
+                        const target = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';
+                        const res = await this.fetchData(target);
+                        const json = await res.json();
+                        
+                        if (json && json.fear_and_greed && json.fear_and_greed.score) {
+                            this.indices.cnn = Math.round(json.fear_and_greed.score);
+                            this.saveData();
+                        }
+                    } catch (e) {
+                        console.error('Fetch CNN F&G Failed:', e);
+                    }
+                },
                 async fetchDualMABias(ticker, key60, key20 = null) {
                     try {
-                        const target = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=6mo`;
+                        const target = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1y`;
                         const res = await this.fetchData(target);
                         const j = await res.json();
-                        const quotes = j.chart.result[0].indicators.quote[0].close;
+                        const result = j.chart.result[0];
+                        
+                        let quotes = [];
+                        if (result.indicators.adjclose && result.indicators.adjclose[0].adjclose) {
+                            quotes = result.indicators.adjclose[0].adjclose;
+                        } else if (result.indicators.quote && result.indicators.quote[0].close) {
+                            quotes = result.indicators.quote[0].close;
+                        }
                         
                         if (quotes && quotes.length > 0) {
                             const validQuotes = quotes.filter(q => q !== null && q !== undefined);
@@ -1576,7 +1787,9 @@
                 },
 
                 async resolveName(symbol) {
-                      const rawCode = symbol.replace('.TW', '').replace('.TWO', '');
+                      let rawCode = symbol.replace('.TW', '').replace('.TWO', '');
+                      if (rawCode === 'AU9901') return '臺銀金 (黃金現貨)';
+                      
                       try {
                           const fmUrl = `https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo&data_id=${rawCode}&token=${this.token.trim()}`;
                           let fmRes = await fetch(fmUrl);
@@ -1599,31 +1812,79 @@
                       return null;
                 },
 
-                refreshMarketData() {
+               refreshMarketData() {
+                    // 原本的股市與匯率指標
                     this.fetchVix();
                     this.fetchDualMABias('0050.TW', 'bias0050', 'bias0050_20');
                     this.fetchDualMABias('^SOX', 'soxBias', 'soxBias_20');
                     this.fetchDualMABias('TWD=X', 'usdtwdBias');
+
+                    // 新增的總經數據自動抓取
+                    this.fetchFredData('T10Y2Y', 'yieldCurve');
+                    this.fetchFredData('T10Y3M', 'yieldCurve3M');
+                    this.fetchFredData('DFII10', 'realRate');
+                    this.fetchCNNFearGreed();
                 },
 
                 async fetchStockInfo(stock) {
                     if (stock.code === 'AU9901') {
-                        stock.name = '臺銀金條塊 (國際金價)';
+                        stock.name = '臺銀金 (黃金現貨)';
                         try {
-                            const res = await fetch('https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=1d&limit=62');
-                            const data = await res.json();
-                            if (data && data.length >= 60) {
-                                const currentPriceUSD = parseFloat(data[data.length - 1][4]);
-                                stock.currentPrice = Math.round(currentPriceUSD / 0.2585);
-                                const last60 = data.slice(-60);
-                                const sum = last60.reduce((acc, k) => acc + parseFloat(k[4]), 0);
-                                const ma60USD = sum / 60;
-                                stock.ma60 = Math.round(ma60USD / 0.2585);
-                                stock.bias60 = ((stock.currentPrice - stock.ma60) / stock.ma60) * 100;
-                                stock.ma60_usd = ma60USD.toFixed(2);
+                            stock.status = 'loading';
+                            
+                            let currentTruePrice = null;
+                            try {
+                                const resAu = await this.fetchData(`https://query1.finance.yahoo.com/v8/finance/chart/AU9901.TWO?interval=1d&range=5d`);
+                                const jAu = await resAu.json();
+                                currentTruePrice = jAu.chart.result[0].meta.regularMarketPrice;
+                            } catch(e) { console.warn('無法抓取 AU9901 真實報價，將使用合成報價替代'); }
+
+                            const resGold = await this.fetchData(`https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d&range=6mo`);
+                            const resTwd = await this.fetchData(`https://query1.finance.yahoo.com/v8/finance/chart/TWD=X?interval=1d&range=6mo`);
+                            
+                            const jGold = await resGold.json();
+                            const jTwd = await resTwd.json();
+                            
+                            const goldQuotes = jGold.chart.result[0].indicators.quote[0].close || [];
+                            const twdQuotes = jTwd.chart.result[0].indicators.quote[0].close || [];
+                            
+                            const validGold = goldQuotes.filter(q => q != null);
+                            const validTwd = twdQuotes.filter(q => q != null);
+                            
+                            const len = Math.min(validGold.length, validTwd.length);
+                            if (len < 60) throw new Error('歷史數據不足 60 天');
+
+                            const slicedGold = validGold.slice(-len);
+                            const slicedTwd = validTwd.slice(-len);
+                            
+                            const ozToMace = 31.1034768 / 3.75; 
+                            
+                            const synthHistory = [];
+                            for (let i = 0; i < len; i++) {
+                                synthHistory.push((slicedGold[i] * slicedTwd[i]) / ozToMace);
                             }
+                            
+                            const latestSynth = synthHistory[synthHistory.length - 1];
+                            const spread = currentTruePrice ? (currentTruePrice / latestSynth) : 1.002;
+                            
+                            stock.currentPrice = currentTruePrice ? Math.round(currentTruePrice) : Math.round(latestSynth * spread);
+                            
+                            const d60 = synthHistory.slice(-60);
+                            const ma60Synth = d60.reduce((a,b) => a+b, 0) / 60;
+                            
+                            stock.ma60 = Math.round(ma60Synth * spread);
+                            stock.bias60 = ((stock.currentPrice - stock.ma60) / stock.ma60) * 100;
+                            
+                            stock.status = 'ok';
+                            stock.errorMsg = '';
+                            
                             this.saveData(); return;
-                        } catch (e) { }
+                        } catch (e) {
+                            console.error('AU9901 雙軌抓取失敗:', e);
+                            stock.status = 'error';
+                            stock.errorMsg = '黃金連線失敗';
+                            this.saveData(); return;
+                        }
                     }
                     
                     try {
@@ -1632,26 +1893,43 @@
                         else if (!symbol.includes('.') && /^\d/.test(symbol)) symbol += '.TW';
                         
                         stock.status = 'loading'; 
-                        const chartTarget = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+                        
+                        const chartTarget = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1y`;
                         const resChart = await this.fetchData(chartTarget);
                         const jChart = await resChart.json();
                         const result = jChart.chart.result[0];
                         const meta = result.meta;
                         
+                        let quotes = [];
+                        if (result.indicators.adjclose && result.indicators.adjclose[0].adjclose) {
+                            quotes = result.indicators.adjclose[0].adjclose;
+                        } else if (result.indicators.quote && result.indicators.quote[0].close) {
+                            quotes = result.indicators.quote[0].close;
+                        }
+                        
+                        const validQuotes = quotes.filter(q => q !== null && q !== undefined);
+                        
                         let price = null;
                         if (meta.regularMarketPrice) price = meta.regularMarketPrice;
                         else if (meta.chartPreviousClose) price = meta.chartPreviousClose;
-                        else if (result.indicators.quote[0].close && result.indicators.quote[0].close.length > 0) {
-                            const closes = result.indicators.quote[0].close;
-                            for (let i = closes.length - 1; i >= 0; i--) {
-                                if (closes[i] !== null && closes[i] !== undefined) { price = closes[i]; break; }
-                            }
-                        }
+                        else if (validQuotes.length > 0) price = validQuotes[validQuotes.length - 1];
 
                         if (price !== null) {
-                            stock.currentPrice = parseFloat(price.toFixed(2));
+                            stock.currentPrice = price > 1000 ? Math.round(price) : parseFloat(price.toFixed(2));
+                            
+                            const d60 = validQuotes.length >= 60 ? validQuotes.slice(-60) : validQuotes;
+                            if (d60.length > 0) {
+                                const ma60 = d60.reduce((a, b) => a + b, 0) / d60.length;
+                                stock.ma60 = price > 1000 ? Math.round(ma60) : parseFloat(ma60.toFixed(2));
+                                stock.bias60 = ((stock.currentPrice - ma60) / ma60) * 100;
+                            } else {
+                                stock.ma60 = null;
+                                stock.bias60 = null;
+                            }
+
                             stock.status = 'ok';
                             stock.errorMsg = '';
+                            
                             if (!stock.name || stock.name === 'SYNC...' || stock.name === '連線錯誤' || stock.name === stock.code) {
                                 const huntedName = await this.resolveName(stock.code);
                                 if (huntedName) stock.name = huntedName;
